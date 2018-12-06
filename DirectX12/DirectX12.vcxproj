@@ -117,10 +117,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Behavior.cpp" />
+    <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Behavior.h" />
+    <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\Main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

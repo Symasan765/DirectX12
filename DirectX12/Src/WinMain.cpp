@@ -1,4 +1,5 @@
 #include "Main.h"
+#include "Game.h"
 #include <crtdbg.h>
 
 #pragma comment(lib, "dxgi.lib")
@@ -13,6 +14,13 @@
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	cGameSystem game;
+	game.Init();
+
+	game.RunLoop();
+
+	game.UnInit();
 
 	return 0;
 }

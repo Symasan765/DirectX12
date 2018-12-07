@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "SystemParameters.h"
-
+#include "Utility.h"
 
 /// <summary>
 /// ÉQÅ[ÉÄÇÃÇ‡Ç¡Ç∆Ç‡ÉÅÉCÉìÇ∆Ç»ÇÈëÂå≥ÇÃä÷êî
@@ -21,10 +21,12 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	m_pWindow = new cWindow(hInst, SystemParameters::g_WindowSizeX, SystemParameters::g_WindowSizeY);
 	m_pGameTime = new cGameTime;
+	m_pDirectX12 = new cDirectX12;
 }
 
 cGameSystem::~cGameSystem()
 {
+	
 }
 
 void cGameSystem::SystemInit()
@@ -73,6 +75,9 @@ void cGameSystem::AppUnInit()
 
 void cGameSystem::SystemUnInit()
 {
+	SAFE_DELETE(m_pGameTime);
+	SAFE_DELETE(m_pDirectX12);
+	SAFE_DELETE(m_pWindow);
 }
 
 void cGameSystem::LoopBegin()

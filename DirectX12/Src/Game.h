@@ -1,5 +1,5 @@
 #pragma once
-#include "Window.h"
+#include "DXWindow.h"
 #include "GameTime.h"
 #include "DirectX12.h"
 
@@ -30,7 +30,7 @@ private:
 	void GameUpdate();
 	void LoopEnd();
 
-	cWindow* m_pWindow = nullptr;
+	cDXWindow* m_pWindow = nullptr;
 	cGameTime* m_pGameTime = nullptr;
 	cDirectX12* m_pDirectX12 = nullptr;
 

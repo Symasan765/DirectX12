@@ -19,7 +19,7 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	m_lpCmdLine = lpCmdLine;
 	m_nCmdShow = nCmdShow;
 
-	m_pWindow = new cWindow(hInst, SystemParameters::g_WindowSizeX, SystemParameters::g_WindowSizeY);
+	m_pWindow = new cDXWindow(hInst);
 	m_pGameTime = new cGameTime;
 	m_pDirectX12 = new cDirectX12;
 }

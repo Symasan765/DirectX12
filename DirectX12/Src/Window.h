@@ -9,7 +9,8 @@ class cWindow
 public:
 	cWindow(HINSTANCE _hInst,int sizeX,int sizeY);
 	~cWindow();
-
+	HWND GetHWND();
+	HINSTANCE GetHINSTANCE();
 private:
 
 	HWND m_hWindow;

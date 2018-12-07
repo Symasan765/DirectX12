@@ -52,3 +52,13 @@ cWindow::~cWindow()
 	// ウインドウ クラスの登録解除
 	UnregisterClass(g_szWndClass, m_hInstance);
 }
+
+HWND cWindow::GetHWND()
+{
+	return m_hWindow;
+}
+
+HINSTANCE cWindow::GetHINSTANCE()
+{
+	return m_hInstance;
+}

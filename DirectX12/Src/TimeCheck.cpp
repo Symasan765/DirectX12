@@ -47,3 +47,14 @@ float cTimeCheck::GetProcessingTime() const
 	//測定した時間を秒単位に変換してfloat値として返す
 	return (float)(m_End.QuadPart - m_Start.QuadPart) / m_Freq.QuadPart;
 }
+
+/// <summary>
+/// 以前のスタートから現在の時間までのトータル時間を返す関数
+/// </summary>
+/// <returns></returns>
+float cTimeCheck::GetAllTime() const
+{
+	LARGE_INTEGER nowTime;
+	QueryPerformanceCounter(&nowTime);
+	return (float)(nowTime.QuadPart - m_Start.QuadPart) / m_Freq.QuadPart;
+}

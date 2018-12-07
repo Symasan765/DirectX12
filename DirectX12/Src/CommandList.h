@@ -1,5 +1,6 @@
 #pragma once
 #include "Main.h"
+#include "Render.h"
 
 /// <summary>
 /// コマンドリストひとつ分を取り扱うクラス
@@ -10,7 +11,7 @@ public:
 	cCommandList(Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAlloc);
 	~cCommandList() = default;
 
-	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetListPtr() { return m_CommandList; };
+	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetListPtr(int no) { return m_CommandList[no]; };
 private:
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandList;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandList[Render::g_LatencyNum];
 };

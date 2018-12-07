@@ -110,6 +110,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -127,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Behavior.h" />
+    <ClInclude Include="Src\DXMath.h" />
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\GameTime.h" />
     <ClInclude Include="Src\SystemParameters.h" />

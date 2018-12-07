@@ -29,8 +29,6 @@ private:
 	void GameUpdate();
 	void LoopEnd();
 
-	void DebugWindow();
-
 	cWindow* m_pWindow = nullptr;
 	cGameTime* m_pGameTime = nullptr;
 

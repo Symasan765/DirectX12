@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -124,6 +124,7 @@
     <ClCompile Include="Src\CommandQueue.cpp" />
     <ClCompile Include="Src\DirectX12.cpp" />
     <ClCompile Include="Src\DXWindow.cpp" />
+    <ClCompile Include="Src\FenceObj.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\GameTime.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DXMath.h" />
     <ClInclude Include="Src\DXWindow.h" />
+    <ClInclude Include="Src\FenceObj.h" />
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\GameTime.h" />
     <ClInclude Include="Src\Render.h" />

@@ -32,7 +32,7 @@ cWindow::cWindow(HINSTANCE _hInst, int sizeX, int sizeY)
 	rect.bottom = (LONG)sizeY;
 	AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME, TRUE);
 
-	rect.top = 0.0f;		// これを無くすとバー位置を画面外へ追いやり、フルスクリーンのような状態にできる
+	rect.top = 0;		// これを無くすとバー位置を画面外へ追いやり、フルスクリーンのような状態にできる
 	m_hWindow = CreateWindow(g_szWndClass, g_szAppTitle,
 		dwStyle,
 		rect.left, rect.top,
@@ -45,6 +45,7 @@ cWindow::cWindow(HINSTANCE _hInst, int sizeX, int sizeY)
 	// ウインドウ表示
 	ShowWindow(m_hWindow, SW_SHOWNORMAL);
 	UpdateWindow(m_hWindow);
+	m_hInstance = _hInst;
 }
 
 cWindow::~cWindow()

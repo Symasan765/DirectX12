@@ -78,6 +78,9 @@
     <ClCompile Include="Src\SwapChain.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
+    <ClCompile Include="Src\DescriptorBase.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -138,6 +141,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Src\SwapChain.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DescriptorBase.h">
       <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>

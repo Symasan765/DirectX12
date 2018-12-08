@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "Main.h"
 #include "SwapChain.h"
+#include "Render.h"
+#include "DescriptorBase.h"
 #include<memory>
 
 /// <summary>
@@ -19,7 +21,16 @@ public:
 private:
 	cDXWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue);
 	~cDXWindow() = default;
+	void CreateMainWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue);
+	void CreateBuffer();
+
 	static Microsoft::WRL::ComPtr<IDXGIFactory4> m_DxgiFactory;
 	static std::unique_ptr<cWindow> m_pWindow;
 	static std::unique_ptr<cSwapChain> m_SwapChain;
+
+
+	static Microsoft::WRL::ComPtr<ID3D12Resource> m_ColorBuffer[Render::g_LatencyNum];
+	static Microsoft::WRL::ComPtr<ID3D12Resource> mDsvResource[Render::g_LatencyNum];
+	static std::unique_ptr<cDescriptorBase> m_pRtvHeap;
+	static std::unique_ptr<cDescriptorBase> m_pDsvHeap;
 };

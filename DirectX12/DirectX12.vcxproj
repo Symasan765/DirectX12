@@ -86,7 +86,11 @@
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -122,6 +126,7 @@
     <ClCompile Include="Src\CommandAllocator.cpp" />
     <ClCompile Include="Src\CommandList.cpp" />
     <ClCompile Include="Src\CommandQueue.cpp" />
+    <ClCompile Include="Src\DepthStencilView.cpp" />
     <ClCompile Include="Src\DescriptorBase.cpp" />
     <ClCompile Include="Src\DirectX12.cpp" />
     <ClCompile Include="Src\DrawPipeline.cpp" />
@@ -141,6 +146,7 @@
     <ClInclude Include="Src\CommandAllocator.h" />
     <ClInclude Include="Src\CommandList.h" />
     <ClInclude Include="Src\CommandQueue.h" />
+    <ClInclude Include="Src\DepthStencilView.h" />
     <ClInclude Include="Src\DescriptorBase.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawPipeline.h" />

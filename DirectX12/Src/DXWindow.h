@@ -3,7 +3,7 @@
 #include "Main.h"
 #include "SwapChain.h"
 #include "Render.h"
-#include "DescriptorBase.h"
+#include "DepthStencilView.h"
 #include<memory>
 
 /// <summary>
@@ -32,5 +32,5 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12Resource> m_ColorBuffer[Render::g_LatencyNum];
 	static Microsoft::WRL::ComPtr<ID3D12Resource> mDsvResource[Render::g_LatencyNum];
 	static std::unique_ptr<cDescriptorBase> m_pRtvHeap;
-	static std::unique_ptr<cDescriptorBase> m_pDsvHeap;
+	static std::unique_ptr<cDepthStencilView> m_pDsvHeap;
 };

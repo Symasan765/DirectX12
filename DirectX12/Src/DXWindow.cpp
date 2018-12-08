@@ -3,6 +3,7 @@
 #include "SystemParameters.h"
 #include "Render.h"
 #include "DirectX12.h"
+#include "DXMath.h"
 #include <d3dx12.h>
 
 Microsoft::WRL::ComPtr<IDXGIFactory4> cDXWindow::m_DxgiFactory;
@@ -11,7 +12,7 @@ std::unique_ptr<cSwapChain> cDXWindow::m_SwapChain;
 Microsoft::WRL::ComPtr<ID3D12Resource> cDXWindow::m_ColorBuffer[Render::g_LatencyNum];
 Microsoft::WRL::ComPtr<ID3D12Resource> cDXWindow::mDsvResource[Render::g_LatencyNum];
 std::unique_ptr<cDescriptorBase> cDXWindow::m_pRtvHeap;
-std::unique_ptr<cDescriptorBase> cDXWindow::m_pDsvHeap;
+std::unique_ptr<cDepthStencilView> cDXWindow::m_pDsvHeap;
 
 cDXWindow::cDXWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue) {
 	CreateMainWindow(_hInst, queue);
@@ -46,7 +47,8 @@ void cDXWindow::CreateBuffer()
 
 	// レンダーターゲット、デプスステンシル用のヒープを確保
 	m_pRtvHeap = std::make_unique<cDescriptorBase>(D3D12_DESCRIPTOR_HEAP_TYPE_RTV,D3D12_DESCRIPTOR_HEAP_FLAG_NONE, Render::g_LatencyNum);
-	m_pDsvHeap = std::make_unique<cDescriptorBase>(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, Render::g_LatencyNum);
+	m_pDsvHeap = std::make_unique<cDepthStencilView>(DXGI_FORMAT_R32_TYPELESS, SystemParameters::g_WindowSizeX, 
+		SystemParameters::g_WindowSizeY, Render::g_LatencyNum, DirectX::XMFLOAT4{ 0.0f,0.0f,0.0f,0.0f });
 
 
 	// レンダーターゲットビューの作成

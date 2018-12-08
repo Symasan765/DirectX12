@@ -1,6 +1,7 @@
 #pragma once
-#include "Main.h"
 #include "Window.h"
+#include "Main.h"
+#include "SwapChain.h"
 #include<memory>
 
 /// <summary>
@@ -16,8 +17,9 @@ public:
 		return m_pWindow->GetHWND();
 	};
 private:
-	cDXWindow(HINSTANCE _hInst);
+	cDXWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue);
 	~cDXWindow() = default;
 	static Microsoft::WRL::ComPtr<IDXGIFactory4> m_DxgiFactory;
 	static std::unique_ptr<cWindow> m_pWindow;
+	static std::unique_ptr<cSwapChain> m_SwapChain;
 };

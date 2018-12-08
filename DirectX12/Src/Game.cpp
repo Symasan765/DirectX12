@@ -19,10 +19,10 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	m_lpCmdLine = lpCmdLine;
 	m_nCmdShow = nCmdShow;
 
-	m_pWindow = new cDXWindow(hInst);
-	m_pGameTime = new cGameTime;
 	m_pDirectX12 = new cDirectX12;
-	m_pDrawPipeline = new cDrawPipeline(m_pWindow->GetDxgiFactory(), m_pWindow->GetHWND());
+	m_pDrawPipeline = new cDrawPipeline();
+	m_pWindow = new cDXWindow(hInst, m_pDrawPipeline->m_Queue->GetQueue());
+	m_pGameTime = new cGameTime;
 }
 
 cGameSystem::~cGameSystem()

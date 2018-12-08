@@ -22,6 +22,7 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	m_pWindow = new cDXWindow(hInst);
 	m_pGameTime = new cGameTime;
 	m_pDirectX12 = new cDirectX12;
+	m_pDrawPipeline = new cDrawPipeline(m_pWindow->GetDxgiFactory(), m_pWindow->GetHWND());
 }
 
 cGameSystem::~cGameSystem()
@@ -78,6 +79,7 @@ void cGameSystem::SystemUnInit()
 	SAFE_DELETE(m_pGameTime);
 	SAFE_DELETE(m_pDirectX12);
 	SAFE_DELETE(m_pWindow);
+	SAFE_DELETE(m_pDrawPipeline);
 }
 
 void cGameSystem::LoopBegin()

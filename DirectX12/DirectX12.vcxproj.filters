@@ -72,6 +72,9 @@
     <ClCompile Include="Src\Behavior.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Src\DrawPipeline.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Src\Behavior.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DrawPipeline.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "DXWindow.h"
 #include "GameTime.h"
 #include "DirectX12.h"
+#include "DrawPipeline.h"
 
 /// <summary>
 /// メイン関数で作成される全システムの核となるクラス
@@ -33,6 +34,7 @@ private:
 	cDXWindow* m_pWindow = nullptr;
 	cGameTime* m_pGameTime = nullptr;
 	cDirectX12* m_pDirectX12 = nullptr;
+	cDrawPipeline* m_pDrawPipeline = nullptr;
 
 	// WinMain引数
 	HINSTANCE m_hInst;

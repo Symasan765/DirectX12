@@ -129,6 +129,7 @@
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\GameTime.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
+    <ClCompile Include="Src\SwapChain.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
     <ClCompile Include="Src\Window.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Src\GameTime.h" />
     <ClInclude Include="Src\Render.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
+    <ClInclude Include="Src\SwapChain.h" />
     <ClInclude Include="Src\SystemParameters.h" />
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\TimeCheck.h" />

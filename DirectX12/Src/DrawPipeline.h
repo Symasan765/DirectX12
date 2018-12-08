@@ -1,5 +1,6 @@
 #pragma once
 #include "CommandQueue.h"
+#include "SwapChain.h"
 
 class cDrawPipeline
 {
@@ -9,4 +10,5 @@ public:
 
 private:
 	std::unique_ptr<cCommandQueue> m_Queue;
+	std::unique_ptr<cSwapChain> m_SwapChain;
 };

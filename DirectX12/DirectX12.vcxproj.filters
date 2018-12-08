@@ -75,6 +75,9 @@
     <ClCompile Include="Src\DrawPipeline.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Src\SwapChain.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Src\DrawPipeline.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SwapChain.h">
+      <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

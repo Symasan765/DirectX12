@@ -1,4 +1,5 @@
 #include "GameTime.h"
+#include "Render.h"
 
 float cGameTime::m_DeltaTime = 0;
 long cGameTime::m_TortalFrame = 0;
@@ -25,4 +26,29 @@ void cGameTime::FrameEnd()
 	if (m_DeltaTime > 1.0f)
 		m_DeltaTime = 1.0f;
 	m_TortalTime = m_TortalTimeCheck.GetAllTime();
+}
+
+int cGameTime::FrameIndex()
+{
+	return m_TortalFrame % Render::g_LatencyNum;
+}
+
+int cGameTime::RenderIndex()
+{
+	return (m_TortalFrame + Render::g_LatencyNum - 1) % Render::g_LatencyNum;
+}
+
+float cGameTime::DeltaTime()
+{
+	return m_DeltaTime;
+}
+
+int cGameTime::TortalFrame()
+{
+	return m_TortalFrame;
+}
+
+float cGameTime::TortalTime()
+{
+	return (float)m_TortalTime;
 }

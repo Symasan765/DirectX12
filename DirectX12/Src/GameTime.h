@@ -13,6 +13,11 @@ public:
 
 	void FrameStart();
 	void FrameEnd();
+	static int FrameIndex();
+	static int RenderIndex();
+	static float DeltaTime();
+	static int TortalFrame();
+	static float TortalTime();
 private:
 	static float m_DeltaTime;
 	static long m_TortalFrame;

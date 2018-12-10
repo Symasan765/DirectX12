@@ -29,7 +29,7 @@ void cDXWindow::CreateMainWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12
 #if _DEBUG
 	CheckHR(CreateDXGIFactory2(DXGI_CREATE_FACTORY_DEBUG, IID_PPV_ARGS(m_DxgiFactory.ReleaseAndGetAddressOf())));
 #else
-	CHK(CreateDXGIFactory2(0, IID_PPV_ARGS(mDxgiFactory.ReleaseAndGetAddressOf())));
+	CheckHR(CreateDXGIFactory2(0, IID_PPV_ARGS(m_DxgiFactory.ReleaseAndGetAddressOf())));
 #endif /* _DEBUG */
 
 	// スワップチェインの作成

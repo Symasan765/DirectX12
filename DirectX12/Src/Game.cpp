@@ -7,7 +7,7 @@
 /// </summary>
 void cGameSystem::GameUpdate()
 {
-	
+	m_pDrawPipeline->ProcessingCPU(cGameTime::FrameIndex());
 }
 
 cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

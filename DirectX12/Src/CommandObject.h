@@ -11,7 +11,9 @@ public:
 	cCommandObject();
 	~cCommandObject() = default;
 
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> GetAllocator(int no);
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetList(int no);
 private:
-	std::unique_ptr <cCommandAllocator> m_pGameAlloc;
-	std::unique_ptr <cCommandList> m_pGameList;
+	std::shared_ptr <cCommandAllocator> m_pAlloc;
+	std::shared_ptr <cCommandList> m_pList;
 };

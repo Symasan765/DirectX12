@@ -10,8 +10,9 @@ public:
 	cCommandSystem();
 	~cCommandSystem() = default;
 
+	std::shared_ptr <cCommandObject> GetBeginCommand() { return m_pBeginCommand; };
 private:
-	std::unique_ptr <cCommandObject[]> m_pGameCommand;		// メインゲームで利用するコマンド群
-	std::unique_ptr <cCommandObject> m_pBeginCommand;		// 前処理用のコマンド群
-	std::unique_ptr <cCommandObject> m_pEndCommand;			// 後処理用のコマンド群
+	std::shared_ptr <cCommandObject[]> m_pGameCommand;		// メインゲームで利用するコマンド群
+	std::shared_ptr <cCommandObject> m_pBeginCommand;		// 前処理用のコマンド群
+	std::shared_ptr <cCommandObject> m_pEndCommand;			// 後処理用のコマンド群
 };

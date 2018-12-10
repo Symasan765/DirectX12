@@ -2,15 +2,23 @@
 #include "CommandQueue.h"
 #include "SwapChain.h"
 #include "CommandSystem.h"
+#include "FenceObj.h"
 
 class cDrawPipeline
 {
 public:
 	friend class cGameSystem;
+
+	void ProcessingCPU(int frameIndex);		// コマンドの発行
+	void ProcessingGPU(int frameIndex);		// コマンドの実行
+private:
 	cDrawPipeline();
 	~cDrawPipeline() = default;
+	void DrawBigen(int frameIndex);
+	void DrawGame(int frameIndex);
+	void DrawEnd(int frameIndex);
 
-private:
 	std::unique_ptr<cCommandQueue> m_Queue;
 	std::unique_ptr<cCommandSystem> m_CommandSystem;
+	std::unique_ptr<cFenceObj> m_FenceObj;
 };

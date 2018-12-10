@@ -26,6 +26,7 @@ void cGameTime::FrameEnd()
 	if (m_DeltaTime > 1.0f)
 		m_DeltaTime = 1.0f;
 	m_TortalTime = m_TortalTimeCheck.GetAllTime();
+	m_TortalFrame++;
 }
 
 int cGameTime::FrameIndex()

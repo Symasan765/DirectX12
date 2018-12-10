@@ -8,6 +8,7 @@
 void cGameSystem::GameUpdate()
 {
 	m_pDrawPipeline->ProcessingCPU(cGameTime::FrameIndex());
+	m_pDrawPipeline->ProcessingGPU(cGameTime::FrameIndex());
 }
 
 cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -84,7 +85,8 @@ void cGameSystem::SystemUnInit()
 
 void cGameSystem::LoopBegin()
 {
-	m_pGameTime->FrameStart();
+	m_pGameTime->FrameStart();				// フレーム数をカウントしたり、時間の計測を開始。
+	m_pWindow->BufferDataUpdate();		// フレーム数からカラーバッファの情報を更新する。
 }
 
 void cGameSystem::LoopEnd()

@@ -4,6 +4,8 @@
 #include "Render.h"
 #include "DirectX12.h"
 #include "DXMath.h"
+#include "GameTime.h"
+#include "DescHandleStep.h"
 #include <d3dx12.h>
 
 Microsoft::WRL::ComPtr<IDXGIFactory4> cDXWindow::m_DxgiFactory;
@@ -13,6 +15,17 @@ Microsoft::WRL::ComPtr<ID3D12Resource> cDXWindow::m_ColorBuffer[Render::g_Latenc
 Microsoft::WRL::ComPtr<ID3D12Resource> cDXWindow::mDsvResource[Render::g_LatencyNum];
 std::unique_ptr<cDescriptorBase> cDXWindow::m_pRtvHeap;
 std::unique_ptr<cDepthStencilView> cDXWindow::m_pDsvHeap;
+WindowBuuferStruct cDXWindow::m_NowBufferData;
+
+inline Microsoft::WRL::ComPtr<ID3D12Resource> cDXWindow::GetColorBuffer(int index)
+{
+	return Microsoft::WRL::ComPtr<ID3D12Resource>();
+}
+
+void cDXWindow::Present()
+{
+	m_SwapChain->Present();
+}
 
 cDXWindow::cDXWindow(HINSTANCE _hInst, Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue) {
 	CreateMainWindow(_hInst, queue);
@@ -60,4 +73,17 @@ void cDXWindow::CreateBuffer()
 		cDirectX12::GetDevice()->CreateRenderTargetView(m_ColorBuffer[i].Get(), nullptr, d);
 	}
 
+}
+
+void cDXWindow::BufferDataUpdate()
+{
+	m_NowBufferData.buffer = m_ColorBuffer[cGameTime::FrameIndex()];
+	m_NowBufferData.HeapDsv = m_pDsvHeap->GetHeap();
+	m_NowBufferData.HeapRtv = m_pRtvHeap->GetHeap();
+
+	m_NowBufferData.descHandleRtv = m_NowBufferData.HeapRtv->GetCPUDescriptorHandleForHeapStart();
+	m_NowBufferData.descHandleRtv.ptr += cGameTime::FrameIndex() * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);		// 先頭アドレス += (No * アドレスサイズ)
+
+	m_NowBufferData.descHandleDsv = m_NowBufferData.HeapDsv->GetCPUDescriptorHandleForHeapStart();
+	//m_NowBufferData.descHandleDsv.ptr += cGameTime::FrameIndex() * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);		// 先頭アドレス += (No * アドレスサイズ)
 }

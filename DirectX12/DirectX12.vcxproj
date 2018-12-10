@@ -129,6 +129,7 @@
     <ClCompile Include="Src\CommandQueue.cpp" />
     <ClCompile Include="Src\CommandSystem.cpp" />
     <ClCompile Include="Src\DepthStencilView.cpp" />
+    <ClCompile Include="Src\DescHandleStep.cpp" />
     <ClCompile Include="Src\DescriptorBase.cpp" />
     <ClCompile Include="Src\DirectX12.cpp" />
     <ClCompile Include="Src\DrawPipeline.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Src\CommandQueue.h" />
     <ClInclude Include="Src\CommandSystem.h" />
     <ClInclude Include="Src\DepthStencilView.h" />
+    <ClInclude Include="Src\DescHandleStep.h" />
     <ClInclude Include="Src\DescriptorBase.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawPipeline.h" />
@@ -167,6 +169,7 @@
     <ClInclude Include="Src\TimeCheck.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\Window.h" />
+    <ClInclude Include="Src\WindowBuuferStruct.h" />
     <ClInclude Include="Src\WindProc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

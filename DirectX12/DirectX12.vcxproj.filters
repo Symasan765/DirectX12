@@ -28,6 +28,9 @@
     <Filter Include="Actor">
       <UniqueIdentifier>{352823fb-6265-4e66-81a8-a68f2ff158de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Struct">
+      <UniqueIdentifier>{bd49e521-ad4b-4aa6-9951-387fb8c7bbd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="Src\CommandObject.cpp">
       <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DescHandleStep.cpp">
+      <Filter>Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Src\CommandObject.h">
       <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\WindowBuuferStruct.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DescHandleStep.h">
+      <Filter>Other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

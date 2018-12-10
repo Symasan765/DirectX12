@@ -1,5 +1,6 @@
 #include "DrawPipeline.h"
 #include "GameTime.h"
+#include "DXWindow.h"
 #include "Utility.h"
 
 cDrawPipeline::cDrawPipeline()
@@ -7,10 +8,32 @@ cDrawPipeline::cDrawPipeline()
 	m_Queue = std::make_unique<cCommandQueue>();
 	m_CommandSystem = std::make_unique<cCommandSystem>();
 	m_FenceObj = std::make_unique<cFenceObj>();
+	m_RtvResourceBarrier = std::make_unique<cResourceBarrier>();
+	m_RtvResourceBarrier->SetState(D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 }
 
 void cDrawPipeline::DrawBigen(int frameIndex)
 {
+	// 各種コマンドを事前に取得しておく。
+	auto commandObj = m_CommandSystem->GetBeginCommand();
+	auto commandList = commandObj->GetList(frameIndex);
+	auto commandAlloc = commandObj->GetAllocator(frameIndex);
+	CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
+
+	auto d3dBuffer = cDXWindow::GetBuuferData().buffer;
+	m_RtvResourceBarrier->SwitchState(commandList, d3dBuffer);
+
+	// デプスステンシルを初期化する
+	commandList->ClearDepthStencilView(cDXWindow::GetBuuferData().descHandleDsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	// レンダーターゲットをクリア
+	{
+		const float ClearColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
+		commandList->ClearRenderTargetView(cDXWindow::GetBuuferData().descHandleRtv, ClearColor, 0, nullptr);
+	}
+
+	// 描画前処理の終了
+	CheckHR(commandList->Close());
 }
 
 void cDrawPipeline::DrawGame(int frameIndex)
@@ -19,6 +42,46 @@ void cDrawPipeline::DrawGame(int frameIndex)
 
 void cDrawPipeline::DrawEnd(int frameIndex)
 {
+	auto commandObj = m_CommandSystem->GetEndCommand();
+	auto commandList = commandObj->GetList(frameIndex);
+	auto commandAlloc = commandObj->GetAllocator(frameIndex);
+
+
+	CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
+
+	// バリアをもとに戻す
+	auto d3dBuffer = cDXWindow::GetBuuferData().buffer;
+	m_RtvResourceBarrier->SwitchState(commandList, d3dBuffer);
+
+	CheckHR(commandList->Close());
+}
+
+void cDrawPipeline::ExeBigen(int frameIndex)
+{
+	// 各種コマンドを事前に取得しておく。
+	auto commandObj = m_CommandSystem->GetBeginCommand();
+	auto commandList = commandObj->GetList(frameIndex);
+	auto commandAlloc = commandObj->GetAllocator(frameIndex);
+
+	ID3D12CommandList* list = commandList.Get();
+
+	m_Queue->GetQueue()->ExecuteCommandLists(1, &list);
+}
+
+void cDrawPipeline::ExeGame(int frameIndex)
+{
+}
+
+void cDrawPipeline::ExeEnd(int frameIndex)
+{
+	// 各種コマンドを事前に取得しておく。
+	auto commandObj = m_CommandSystem->GetEndCommand();
+	auto commandList = commandObj->GetList(frameIndex);
+	auto commandAlloc = commandObj->GetAllocator(frameIndex);
+
+	ID3D12CommandList* list = commandList.Get();
+
+	m_Queue->GetQueue()->ExecuteCommandLists(1, &list);
 }
 
 void cDrawPipeline::ProcessingCPU(int frameIndex)
@@ -28,9 +91,9 @@ void cDrawPipeline::ProcessingCPU(int frameIndex)
 	{
 		m_FenceObj->WaitForPreviousFrame(cGameTime::TortalFrame() - Render::g_LatencyNum);
 
-		CheckHR(m_CommandSystem->GetBeginCommand()->GetAllocator(cGameTime::FrameIndex()).Get()->Reset());
+		m_CommandSystem->AllocReset(frameIndex);
 	}
-	
+
 
 	// 前処理
 	DrawBigen(frameIndex);
@@ -44,5 +107,13 @@ void cDrawPipeline::ProcessingCPU(int frameIndex)
 
 void cDrawPipeline::ProcessingGPU(int frameIndex)
 {
+	int renderIndex = cGameTime::FrameIndex();		// TODO並列化させた際にはここを現在のインデックスから変更すること
 
+	ExeBigen(renderIndex);
+	ExeGame(renderIndex);
+	ExeEnd(renderIndex);
+
+	m_FenceObj->Signal(m_Queue->GetQueue(), cGameTime::TortalFrame());
+
+	cDXWindow::Present();
 }

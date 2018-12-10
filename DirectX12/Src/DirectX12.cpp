@@ -1,5 +1,6 @@
 #include "DirectX12.h"
 #include "Utility.h"
+#include "DescHandleStep.h"
 
 ID3D12Device * cDirectX12::m_Device = nullptr;
 
@@ -23,6 +24,10 @@ cDirectX12::cDirectX12()
 		D3D_FEATURE_LEVEL_11_0,
 		IID_PPV_ARGS(&dev)));
 	m_Device = dev;
+
+	// ヒープサイズをグローバルとして保持しておく
+	cDescHandleStep globalDescStep;
+	globalDescStep.Init(m_Device);
 }
 
 cDirectX12::~cDirectX12()

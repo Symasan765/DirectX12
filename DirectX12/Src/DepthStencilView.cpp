@@ -1,6 +1,7 @@
 #include "DepthStencilView.h"
 #include "Utility.h"
 #include "DirectX12.h"
+#include "DescHandleStep.h"
 
 cDepthStencilView::cDepthStencilView(DXGI_FORMAT format, UINT witdh, UINT height,  UINT num, DirectX::XMFLOAT4 color, D3D12_RESOURCE_DIMENSION dimension)
 	: cDescriptorBase(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, num)
@@ -35,9 +36,9 @@ cDepthStencilView::cDepthStencilView(DXGI_FORMAT format, UINT witdh, UINT height
 
 	D3D12_CPU_DESCRIPTOR_HANDLE handle = m_DescHeap->GetCPUDescriptorHandleForHeapStart();
 	auto rtvStep = cDirectX12::GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
-	for (int i = 0; i < Render::g_LatencyNum; i++) {
-		CheckHR(cDirectX12::GetDevice()->CreateCommittedResource(&HeapProps, D3D12_HEAP_FLAG_NONE, &DepthDesc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &ClearValue, IID_PPV_ARGS(&m_DsvResource[i])));
+	CheckHR(cDirectX12::GetDevice()->CreateCommittedResource(&HeapProps, D3D12_HEAP_FLAG_NONE, &DepthDesc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &ClearValue, IID_PPV_ARGS(&m_DsvResource)));
 
+	for (int i = 0; i < Render::g_LatencyNum; i++) {
 		D3D12_DEPTH_STENCIL_VIEW_DESC DSVDesc;
 		ZeroMemory(&DSVDesc, sizeof(DSVDesc));
 		DSVDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
@@ -48,7 +49,8 @@ cDepthStencilView::cDepthStencilView(DXGI_FORMAT format, UINT witdh, UINT height
 
 		D3D12_CPU_DESCRIPTOR_HANDLE handleDSV;
 		handleDSV = m_DescHeap->GetCPUDescriptorHandleForHeapStart();
+		handleDSV.ptr += i * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 
-		cDirectX12::GetDevice()->CreateDepthStencilView(m_DsvResource[i].Get(), &DSVDesc, handleDSV);
+		cDirectX12::GetDevice()->CreateDepthStencilView(m_DsvResource.Get(), &DSVDesc, handleDSV);
 	}
 }

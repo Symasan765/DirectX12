@@ -10,5 +10,5 @@ public:
 	~cDepthStencilView() = default;
 
 private:
-	Microsoft::WRL::ComPtr<ID3D12Resource> m_DsvResource[Render::g_LatencyNum];
+	Microsoft::WRL::ComPtr<ID3D12Resource> m_DsvResource;
 };

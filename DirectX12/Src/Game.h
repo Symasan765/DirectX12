@@ -28,6 +28,7 @@ private:
 
 	// ループの開始時、更新、終了時処理
 	void LoopBegin();
+	void ThreadProcess();
 	void GameUpdate();
 	void CommandRender();
 	void LoopEnd();

@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "SystemParameters.h"
 #include "Utility.h"
+#include <thread>
 
 /// <summary>
 /// ゲームのもっともメインとなる大元の関数
@@ -68,8 +69,7 @@ void cGameSystem::RunLoop()
 		{
 			LoopBegin();
 
-			GameUpdate();
-			CommandRender();
+			ThreadProcess();
 
 			LoopEnd();
 		}
@@ -98,6 +98,15 @@ void cGameSystem::LoopBegin()
 {
 	m_pGameTime->FrameStart();				// フレーム数をカウントしたり、時間の計測を開始。
 	m_pWindow->BufferDataUpdate();		// フレーム数からカラーバッファの情報を更新する。
+}
+
+void cGameSystem::ThreadProcess()
+{
+	// シーンの更新処理と描画処理を並列に処理する
+	std::thread gameUpdateThread(&cGameSystem::GameUpdate, this);
+	std::thread commandRenderThread(&cGameSystem::CommandRender, this);
+	gameUpdateThread.join();
+	commandRenderThread.join();
 }
 
 void cGameSystem::LoopEnd()

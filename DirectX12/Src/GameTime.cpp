@@ -36,7 +36,7 @@ int cGameTime::FrameIndex()
 
 int cGameTime::RenderIndex()
 {
-	return (m_TortalFrame + Render::g_LatencyNum - 1) % Render::g_LatencyNum;
+	return (m_TortalFrame- 1) % Render::g_LatencyNum;
 }
 
 float cGameTime::DeltaTime()

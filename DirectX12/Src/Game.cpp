@@ -7,8 +7,13 @@
 /// </summary>
 void cGameSystem::GameUpdate()
 {
-	m_pDrawPipeline->ProcessingCPU(cGameTime::FrameIndex());
-	m_pDrawPipeline->ProcessingGPU(cGameTime::FrameIndex());
+	
+}
+
+void cGameSystem::CommandRender()
+{
+	m_pDrawPipeline->ProcessingCPU(cGameTime::RenderIndex());
+	m_pDrawPipeline->ProcessingGPU(cGameTime::RenderIndex());
 }
 
 cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -47,6 +52,11 @@ void cGameSystem::Init()
 
 void cGameSystem::RunLoop()
 {
+	// フレームを遅延させるので1フレーム目は描画実行はせずに更新と描画コマンドの発行だけ行っておく
+	LoopBegin();
+	GameUpdate();
+	LoopEnd();
+
 	do
 	{
 		if (PeekMessage(&m_Msg, 0, 0, 0, PM_REMOVE))
@@ -59,6 +69,7 @@ void cGameSystem::RunLoop()
 			LoopBegin();
 
 			GameUpdate();
+			CommandRender();
 
 			LoopEnd();
 		}
@@ -92,4 +103,5 @@ void cGameSystem::LoopBegin()
 void cGameSystem::LoopEnd()
 {
 	m_pGameTime->FrameEnd();
+	cDXWindow::Present();
 }

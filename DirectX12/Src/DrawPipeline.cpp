@@ -87,7 +87,7 @@ void cDrawPipeline::ExeEnd(int frameIndex)
 void cDrawPipeline::ProcessingCPU(int frameIndex)
 {
 	// コマンドが溜まり切るのを待っている
-	if (cGameTime::TortalFrame() > Render::g_LatencyNum)
+	if (cGameTime::TortalFrame() > Render::g_LatencyNum - 1)
 	{
 		m_FenceObj->WaitForPreviousFrame(cGameTime::TortalFrame() - Render::g_LatencyNum);
 
@@ -107,13 +107,11 @@ void cDrawPipeline::ProcessingCPU(int frameIndex)
 
 void cDrawPipeline::ProcessingGPU(int frameIndex)
 {
-	int renderIndex = cGameTime::FrameIndex();		// TODO並列化させた際にはここを現在のインデックスから変更すること
+	int renderIndex = frameIndex;
 
 	ExeBigen(renderIndex);
 	ExeGame(renderIndex);
 	ExeEnd(renderIndex);
 
 	m_FenceObj->Signal(m_Queue->GetQueue(), cGameTime::TortalFrame());
-
-	cDXWindow::Present();
 }

@@ -31,6 +31,12 @@
     <Filter Include="Struct">
       <UniqueIdentifier>{bd49e521-ad4b-4aa6-9951-387fb8c7bbd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{8f094c29-99de-4db2-aa9c-396f46251155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\ImGUI">
+      <UniqueIdentifier>{1f7a3dcb-c9b1-4dba-9760-dccfcbf37d3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -95,6 +101,21 @@
     </ClCompile>
     <ClCompile Include="Src\DescHandleStep.cpp">
       <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUIManager.cpp">
+      <Filter>Library\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUI\imgui.cpp">
+      <Filter>Library\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUI\imgui_demo.cpp">
+      <Filter>Library\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUI\imgui_draw.cpp">
+      <Filter>Library\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp">
+      <Filter>Library\ImGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +196,30 @@
     </ClInclude>
     <ClInclude Include="Src\DescHandleStep.h">
       <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUIManager.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui_impl_dx12.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui_internal.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\stb_textedit.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\stb_truetype.h">
+      <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imconfig.h">
+      <Filter>Library\ImGUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

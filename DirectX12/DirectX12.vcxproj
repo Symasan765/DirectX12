@@ -137,6 +137,11 @@
     <ClCompile Include="Src\FenceObj.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\GameTime.cpp" />
+    <ClCompile Include="Src\ImGUIManager.cpp" />
+    <ClCompile Include="Src\ImGUI\imgui.cpp" />
+    <ClCompile Include="Src\ImGUI\imgui_demo.cpp" />
+    <ClCompile Include="Src\ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
     <ClCompile Include="Src\SwapChain.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
@@ -161,6 +166,14 @@
     <ClInclude Include="Src\FenceObj.h" />
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\GameTime.h" />
+    <ClInclude Include="Src\ImGUIManager.h" />
+    <ClInclude Include="Src\ImGUI\imconfig.h" />
+    <ClInclude Include="Src\ImGUI\imgui.h" />
+    <ClInclude Include="Src\ImGUI\imgui_impl_dx12.h" />
+    <ClInclude Include="Src\ImGUI\imgui_internal.h" />
+    <ClInclude Include="Src\ImGUI\stb_rect_pack.h" />
+    <ClInclude Include="Src\ImGUI\stb_textedit.h" />
+    <ClInclude Include="Src\ImGUI\stb_truetype.h" />
     <ClInclude Include="Src\Render.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
     <ClInclude Include="Src\SwapChain.h" />

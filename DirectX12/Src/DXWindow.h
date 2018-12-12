@@ -16,7 +16,7 @@ public:
 	friend class cGameSystem;	// cGameSystemƒNƒ‰ƒX“à‚Å‚µ‚©ì¬‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
 
 	inline static Microsoft::WRL::ComPtr<IDXGIFactory2> GetDxgiFactory() { return m_DxgiFactory; };
-	HWND GetHWND() {
+	static HWND GetHWND() {
 		return m_pWindow->GetHWND();
 	};
 

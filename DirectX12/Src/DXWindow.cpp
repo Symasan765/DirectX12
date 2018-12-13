@@ -77,6 +77,7 @@ void cDXWindow::CreateBuffer()
 
 void cDXWindow::BufferDataUpdate()
 {
+	m_SwapChain->Get()->GetCurrentBackBufferIndex();
 	m_NowBufferData.buffer = m_ColorBuffer[cGameTime::FrameIndex()];
 	m_NowBufferData.HeapDsv = m_pDsvHeap->GetHeap();
 	m_NowBufferData.HeapRtv = m_pRtvHeap->GetHeap();

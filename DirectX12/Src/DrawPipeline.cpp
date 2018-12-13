@@ -2,6 +2,7 @@
 #include "GameTime.h"
 #include "DXWindow.h"
 #include "Utility.h"
+#include "ImGUIManager.h"
 
 cDrawPipeline::cDrawPipeline()
 {
@@ -54,6 +55,8 @@ void cDrawPipeline::DrawEnd(int frameIndex)
 	m_RtvResourceBarrier->SwitchState(commandList, d3dBuffer);
 
 	CheckHR(commandList->Close());
+
+	cImGUIManager::Draw(frameIndex);
 }
 
 void cDrawPipeline::ExeBigen(int frameIndex)
@@ -82,6 +85,8 @@ void cDrawPipeline::ExeEnd(int frameIndex)
 	ID3D12CommandList* list = commandList.Get();
 
 	m_Queue->GetQueue()->ExecuteCommandLists(1, &list);
+
+	cImGUIManager::Exe(m_Queue->GetQueue(),frameIndex);
 }
 
 void cDrawPipeline::ProcessingCPU(int frameIndex)

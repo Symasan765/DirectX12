@@ -69,6 +69,7 @@ void cGameSystem::RunLoop()
 		else
 		{
 			LoopBegin();
+			m_ImGUI->NewFrame();						// ImGUIのフレームを更新する
 
 			ThreadProcess();
 

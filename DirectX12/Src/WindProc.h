@@ -1,11 +1,13 @@
 #pragma once
 #include <Windows.h>
+#include "ImGUIManager.h"
 
 LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
 	case WM_SIZE:
+		cImGUIManager::InvalidateDeviceObjects();
 		return 0;
 	case WM_DESTROY: {
 		// ウインドウを閉じる

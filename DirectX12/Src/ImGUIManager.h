@@ -14,6 +14,7 @@ public:
 	static void Draw(int frameIndex);
 	static void Exe(Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue, int frameIndex);
 	static void InvalidateDeviceObjects();		// ウィンドウプロシージャからの呼び出しだけ
+	static void AllocReset(int frameIndex);
 private:
 	// 不要 =====
 	void Create();

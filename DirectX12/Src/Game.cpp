@@ -55,9 +55,9 @@ void cGameSystem::Init()
 void cGameSystem::RunLoop()
 {
 	// フレームを遅延させるので1フレーム目は描画実行はせずに更新と描画コマンドの発行だけ行っておく
-	LoopBegin();
+	/*LoopBegin();
 	GameUpdate();
-	LoopEnd();
+	LoopEnd();*/
 
 	do
 	{

@@ -39,6 +39,7 @@ void cDrawPipeline::DrawBigen(int frameIndex)
 
 void cDrawPipeline::DrawGame(int frameIndex)
 {
+	cImGUIManager::Draw(cGameTime::RenderIndex());
 }
 
 void cDrawPipeline::DrawEnd(int frameIndex)
@@ -55,8 +56,6 @@ void cDrawPipeline::DrawEnd(int frameIndex)
 	m_RtvResourceBarrier->SwitchState(commandList, d3dBuffer);
 
 	CheckHR(commandList->Close());
-
-	cImGUIManager::Draw(frameIndex);
 }
 
 void cDrawPipeline::ExeBigen(int frameIndex)
@@ -73,6 +72,7 @@ void cDrawPipeline::ExeBigen(int frameIndex)
 
 void cDrawPipeline::ExeGame(int frameIndex)
 {
+	cImGUIManager::Exe(m_Queue->GetQueue(), cGameTime::RenderIndex());
 }
 
 void cDrawPipeline::ExeEnd(int frameIndex)
@@ -85,8 +85,6 @@ void cDrawPipeline::ExeEnd(int frameIndex)
 	ID3D12CommandList* list = commandList.Get();
 
 	m_Queue->GetQueue()->ExecuteCommandLists(1, &list);
-
-	cImGUIManager::Exe(m_Queue->GetQueue(),frameIndex);
 }
 
 void cDrawPipeline::ProcessingCPU(int frameIndex)
@@ -97,6 +95,7 @@ void cDrawPipeline::ProcessingCPU(int frameIndex)
 		m_FenceObj->WaitForPreviousFrame(cGameTime::TortalFrame() - Render::g_LatencyNum);
 
 		m_CommandSystem->AllocReset(frameIndex);
+		cImGUIManager::AllocReset(frameIndex);
 	}
 
 

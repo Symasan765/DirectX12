@@ -16,12 +16,14 @@ cSwapChain::cSwapChain(Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue, Microso
 	desc.OutputWindow = hwnd;
 	desc.SampleDesc.Count = 1;
 	desc.Windowed = true;
+	desc.Flags = DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT;
 
 	IDXGISwapChain* pSwap;
 	CheckHR(dxgi->CreateSwapChain(queue.Get(), &desc, &pSwap));
 
 	CheckHR(pSwap->QueryInterface(IID_PPV_ARGS(&m_SwapChain)));
 	pSwap->Release();
+	m_SwapChain->SetMaximumFrameLatency(Render::g_LatencyNum);
 }
 
 void cSwapChain::Present()

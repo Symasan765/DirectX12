@@ -77,13 +77,14 @@ void cDXWindow::CreateBuffer()
 
 void cDXWindow::BufferDataUpdate()
 {
-	m_SwapChain->Get()->GetCurrentBackBufferIndex();
-	m_NowBufferData.buffer = m_ColorBuffer[cGameTime::FrameIndex()];
+	cGameTime::SetCurrentBackBufferIndex(m_SwapChain->Get()->GetCurrentBackBufferIndex());
+	
+	m_NowBufferData.buffer = m_ColorBuffer[cGameTime::RenderIndex()];
 	m_NowBufferData.HeapDsv = m_pDsvHeap->GetHeap();
 	m_NowBufferData.HeapRtv = m_pRtvHeap->GetHeap();
 
 	m_NowBufferData.descHandleRtv = m_NowBufferData.HeapRtv->GetCPUDescriptorHandleForHeapStart();
-	m_NowBufferData.descHandleRtv.ptr += cGameTime::FrameIndex() * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);		// 先頭アドレス += (No * アドレスサイズ)
+	m_NowBufferData.descHandleRtv.ptr += cGameTime::RenderIndex() * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);		// 先頭アドレス += (No * アドレスサイズ)
 
 	m_NowBufferData.descHandleDsv = m_NowBufferData.HeapDsv->GetCPUDescriptorHandleForHeapStart();
 	//m_NowBufferData.descHandleDsv.ptr += cGameTime::FrameIndex() * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);		// 先頭アドレス += (No * アドレスサイズ)

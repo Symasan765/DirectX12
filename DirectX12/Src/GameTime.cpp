@@ -4,6 +4,7 @@
 float cGameTime::m_DeltaTime = 0;
 long cGameTime::m_TortalFrame = 0;
 double cGameTime::m_TortalTime = 0;
+unsigned cGameTime::m_CurrentIndex = 0;
 cTimeCheck cGameTime::m_DeltaTimeCheck;
 cTimeCheck cGameTime::m_TortalTimeCheck;
 
@@ -31,12 +32,12 @@ void cGameTime::FrameEnd()
 
 int cGameTime::FrameIndex()
 {
-	return m_TortalFrame % Render::g_LatencyNum;
+	return (m_CurrentIndex + (Render::g_LatencyNum - 1)) % Render::g_LatencyNum;
 }
 
 int cGameTime::RenderIndex()
 {
-	return (m_TortalFrame- 1) % Render::g_LatencyNum;
+	return m_CurrentIndex;
 }
 
 float cGameTime::DeltaTime()
@@ -52,4 +53,9 @@ int cGameTime::TortalFrame()
 float cGameTime::TortalTime()
 {
 	return (float)m_TortalTime;
+}
+
+void cGameTime::SetCurrentBackBufferIndex(UINT idx)
+{
+	m_CurrentIndex = idx;
 }

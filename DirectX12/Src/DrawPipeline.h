@@ -14,13 +14,15 @@ public:
 	void ProcessingGPU(int frameIndex);		// コマンドの実行
 private:
 	cDrawPipeline();
-	~cDrawPipeline() = default;
+	~cDrawPipeline();
 	void DrawBigen(int frameIndex);
 	void DrawGame(int frameIndex);
+	void DrawImGUI(int frameIndex);
 	void DrawEnd(int frameIndex);
 
 	void ExeBigen(int frameIndex);
 	void ExeGame(int frameIndex);
+	void ExeImGUI(int frameIndex);
 	void ExeEnd(int frameIndex);
 
 	std::unique_ptr<cCommandQueue> m_Queue;

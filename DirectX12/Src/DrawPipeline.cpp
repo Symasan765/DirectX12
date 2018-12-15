@@ -13,6 +13,11 @@ cDrawPipeline::cDrawPipeline()
 	m_RtvResourceBarrier->SetState(D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 }
 
+cDrawPipeline::~cDrawPipeline()
+{
+	m_FenceObj->Signal(m_Queue->GetQueue(), cGameTime::TortalFrame());
+}
+
 void cDrawPipeline::DrawBigen(int frameIndex)
 {
 	// 各種コマンドを事前に取得しておく。
@@ -39,7 +44,12 @@ void cDrawPipeline::DrawBigen(int frameIndex)
 
 void cDrawPipeline::DrawGame(int frameIndex)
 {
-	cImGUIManager::Draw(cGameTime::RenderIndex());
+	
+}
+
+void cDrawPipeline::DrawImGUI(int frameIndex)
+{
+	cImGUIManager::Draw(frameIndex);
 }
 
 void cDrawPipeline::DrawEnd(int frameIndex)
@@ -72,7 +82,12 @@ void cDrawPipeline::ExeBigen(int frameIndex)
 
 void cDrawPipeline::ExeGame(int frameIndex)
 {
-	cImGUIManager::Exe(m_Queue->GetQueue(), cGameTime::RenderIndex());
+	
+}
+
+void cDrawPipeline::ExeImGUI(int frameIndex)
+{
+	cImGUIManager::Exe(m_Queue->GetQueue(), frameIndex);
 }
 
 void cDrawPipeline::ExeEnd(int frameIndex)
@@ -105,6 +120,8 @@ void cDrawPipeline::ProcessingCPU(int frameIndex)
 	// ゲーム処理
 	DrawGame(frameIndex);
 
+	DrawImGUI(frameIndex);
+
 	// 後処理
 	DrawEnd(frameIndex);
 }
@@ -115,6 +132,7 @@ void cDrawPipeline::ProcessingGPU(int frameIndex)
 
 	ExeBigen(renderIndex);
 	ExeGame(renderIndex);
+	ExeImGUI(renderIndex);
 	ExeEnd(renderIndex);
 
 	m_FenceObj->Signal(m_Queue->GetQueue(), cGameTime::TortalFrame());

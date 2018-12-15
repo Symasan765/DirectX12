@@ -1,7 +1,7 @@
 # DirectX12ドキュメント
 
 ## 現在の目標！
-DirectXデバイスを作成し、基本的なコマンド系のクラスを作成する。
+PSOマネージャーの作成とRenderingFrameworkの作成
 
 ## 必要な機能
 PBRを用いたForward+レンダリングを行う。

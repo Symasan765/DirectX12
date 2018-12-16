@@ -123,6 +123,9 @@
     <ClCompile Include="Src\ImGUI\imgui_impl_win32.cpp">
       <Filter>Library\ImGUI</Filter>
     </ClCompile>
+    <ClCompile Include="Src\PSOManager.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="Src\ImGUI\imgui_impl_win32.h">
       <Filter>Library\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PSOManager.h">
+      <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

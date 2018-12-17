@@ -13,14 +13,35 @@ void cRootSignature::AddSRV(UINT baseShaderRegister, UINT registerSpace, UINT of
 	AddDescriptorRange(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, baseShaderRegister, registerSpace, offsetInDescriptorsFromTableStart);
 }
 
+void cRootSignature::AddNumSRV(UINT num, UINT registerSpace, UINT offsetInDescriptorsFromTableStart)
+{
+	for (UINT i = 0; i < num; i++) {
+		AddSRV(i, registerSpace, offsetInDescriptorsFromTableStart);
+	}
+}
+
 void cRootSignature::AddCBV(UINT baseShaderRegister, UINT registerSpace, UINT offsetInDescriptorsFromTableStart)
 {
 	AddDescriptorRange(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, baseShaderRegister, registerSpace, offsetInDescriptorsFromTableStart);
 }
 
+void cRootSignature::AddNumCBV(UINT num, UINT registerSpace, UINT offsetInDescriptorsFromTableStart)
+{
+	for (UINT i = 0; i < num; i++) {
+		AddCBV(i, registerSpace, offsetInDescriptorsFromTableStart);
+	}
+}
+
 void cRootSignature::AddUAV(UINT baseShaderRegister, UINT registerSpace, UINT offsetInDescriptorsFromTableStart)
 {
 	AddDescriptorRange(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, baseShaderRegister, registerSpace, offsetInDescriptorsFromTableStart);
+}
+
+void cRootSignature::AddNumUAV(UINT num, UINT registerSpace, UINT offsetInDescriptorsFromTableStart)
+{
+	for (UINT i = 0; i < num; i++) {
+		AddUAV(i, registerSpace, offsetInDescriptorsFromTableStart);
+	}
 }
 
 void cRootSignature::AddSamplers(CD3DX12_STATIC_SAMPLER_DESC samp)

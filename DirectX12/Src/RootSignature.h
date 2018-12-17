@@ -6,6 +6,7 @@
 class cRootSignature
 {
 public:
+	friend class cPipelineStateObj;		// cPipelineStateObj内でのみ作成を行う
 	cRootSignature() = default;
 	~cRootSignature() = default;
 
@@ -15,10 +16,21 @@ public:
 		UINT registerSpace = 0,
 		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
 
+	void AddNumSRV(
+		UINT num,
+		UINT registerSpace = 0,
+		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
+
 	void AddCBV(UINT baseShaderRegister, UINT registerSpace = 0,
 		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
 
+	void AddNumCBV(UINT num, UINT registerSpace = 0,
+		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
+
 	void AddUAV(UINT baseShaderRegister, UINT registerSpace = 0,
+		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
+
+	void AddNumUAV(UINT num, UINT registerSpace = 0,
 		UINT offsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND);
 
 	void AddSamplers(CD3DX12_STATIC_SAMPLER_DESC samp);
@@ -29,13 +41,11 @@ public:
 		D3D12_STATIC_BORDER_COLOR borderColor = D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE,
 		FLOAT minLOD = 0.f, FLOAT maxLOD = D3D12_FLOAT32_MAX, D3D12_SHADER_VISIBILITY shaderVisibility = D3D12_SHADER_VISIBILITY_ALL, UINT registerSpace = 0);
 
-
-
-	// 必要な登録が出来たらこの関数を実行してルートシグネチャ本体の作成を行う
-	void CreateCommit(D3D12_ROOT_SIGNATURE_FLAGS type = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
-
 	inline Microsoft::WRL::ComPtr<ID3D12RootSignature>& GetRootSignature() { return m_RootSignature; };
 private:
+	// 必要な登録が出来たらこの関数を実行してcPipelineStateObjクラスにてルートシグネチャ本体の作成を行う
+	void CreateCommit(D3D12_ROOT_SIGNATURE_FLAGS type = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
 	void AddDescriptorRange(D3D12_DESCRIPTOR_RANGE_TYPE rangeType,
 		UINT baseShaderRegister,
 		UINT registerSpace,

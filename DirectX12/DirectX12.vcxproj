@@ -144,8 +144,10 @@
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_impl_win32.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\PSOManager.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
+    <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\SwapChain.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
@@ -181,9 +183,12 @@
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h" />
     <ClInclude Include="Src\ImGUI\stb_textedit.h" />
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
+    <ClInclude Include="Src\InputLayout.h" />
+    <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\PSOManager.h" />
     <ClInclude Include="Src\Render.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
+    <ClInclude Include="Src\ShaderByte.h" />
     <ClInclude Include="Src\SwapChain.h" />
     <ClInclude Include="Src\SystemParameters.h" />
     <ClInclude Include="Src\Main.h" />

@@ -132,6 +132,9 @@
     <ClCompile Include="Src\ShaderByte.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
+    <ClCompile Include="Src\RootSignature.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -258,6 +261,9 @@
       <Filter>DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Src\ShaderByte.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RootSignature.h">
       <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>

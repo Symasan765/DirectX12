@@ -5,8 +5,14 @@
 #include "InputLayout.h"
 #include "ShaderByte.h"
 
-cPipelineStateObj::cPipelineStateObj()
+cPipelineStateObj::cPipelineStateObj(std::string psoName)
 {
+	m_pRootSignature = std::make_shared<cRootSignature>();
+	m_pShaderByte = std::make_shared<cShaderByte>();
+	m_pInputLayout = std::make_shared<cInputLayout>();
+	m_PsoName = psoName;
+
+	// 暫定的な初期化。今後、ここらも変更できるようにする可能性あり
 	psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	psoDesc.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;
 	psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(CD3DX12_DEFAULT());
@@ -22,6 +28,14 @@ cPipelineStateObj::cPipelineStateObj()
 
 void cPipelineStateObj::CreatePipelineState()
 {
+	// 各設定用オブジェの作成を行う
+	m_pRootSignature->CreateCommit();
+	InputLayoutSetting(m_pInputLayout.get());
+	if (m_RtvFormat.size() > 0)
+		RenderTargetSetting(&m_RtvFormat[0], m_RtvFormat.size());
+	RootSignatureSetting(m_pRootSignature->GetRootSignature().Get());
+	ShaderBytecodeSetting(m_pShaderByte.get());
+
 	CheckHR(cDirectX12::GetDevice()->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(m_Pso.ReleaseAndGetAddressOf())));
 }
 

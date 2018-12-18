@@ -45,7 +45,7 @@ void cDrawPipeline::DrawBigen(int frameIndex)
 
 void cDrawPipeline::DrawGame(int frameIndex)
 {
-	
+	m_RenderingFramework->Draw(m_CommandSystem, frameIndex);
 }
 
 void cDrawPipeline::DrawImGUI(int frameIndex)
@@ -83,7 +83,7 @@ void cDrawPipeline::ExeBigen(int frameIndex)
 
 void cDrawPipeline::ExeGame(int frameIndex)
 {
-	
+	m_RenderingFramework->Execute(m_Queue, frameIndex);
 }
 
 void cDrawPipeline::ExeImGUI(int frameIndex)

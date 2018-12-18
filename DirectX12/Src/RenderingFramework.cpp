@@ -26,11 +26,8 @@ void cRenderingFramework::CreatePSO()
 	auto& format = pso->GetSettingRtvFormat();
 
 	rootSig->AddSamplers(0);
-	rootSig->AddCBV(0);
-	rootSig->AddCBV(1);
-	rootSig->AddCBV(2);
-	rootSig->AddCBV(3);
-	rootSig->AddSRV(0);
+	rootSig->AddNumCBV(4);
+	rootSig->AddNumSRV(1);
 
 	shaderByte->CompileFromFile("HLSL/PBR.hlsl", "VSMain", "PSMain");
 

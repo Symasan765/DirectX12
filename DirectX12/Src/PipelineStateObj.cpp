@@ -32,7 +32,7 @@ void cPipelineStateObj::CreatePipelineState()
 	m_pRootSignature->CreateCommit();
 	InputLayoutSetting(m_pInputLayout.get());
 	if (m_RtvFormat.size() > 0)
-		RenderTargetSetting(&m_RtvFormat[0], m_RtvFormat.size());
+		RenderTargetSetting(&m_RtvFormat[0], (unsigned)m_RtvFormat.size());
 	RootSignatureSetting(m_pRootSignature->GetRootSignature().Get());
 	ShaderBytecodeSetting(m_pShaderByte.get());
 
@@ -43,7 +43,7 @@ void cPipelineStateObj::RenderTargetSetting(DXGI_FORMAT * format, unsigned RTNum
 {
 	psoDesc.NumRenderTargets = RTNum;
 
-	for (int i = 0; i < RTNum; i++)
+	for (unsigned i = 0; i < RTNum; i++)
 		psoDesc.RTVFormats[i] = format[i];
 }
 
@@ -94,7 +94,7 @@ void cPipelineStateObj::InputLayoutSetting(D3D12_INPUT_ELEMENT_DESC * inputLayou
 
 void cPipelineStateObj::InputLayoutSetting(cInputLayout * inputLayout)
 {
-	psoDesc.InputLayout.NumElements = inputLayout->GetSize();
+	psoDesc.InputLayout.NumElements = (UINT)inputLayout->GetSize();
 	psoDesc.InputLayout.pInputElementDescs = inputLayout->GetInputElementDesc();
 }
 

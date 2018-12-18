@@ -144,6 +144,12 @@
     <ClCompile Include="Src\Texture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Src\TextureLoader.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ResourceCreateCommand.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -279,6 +285,12 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Src\Texture.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\TextureLoader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ResourceCreateCommand.h">
       <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>

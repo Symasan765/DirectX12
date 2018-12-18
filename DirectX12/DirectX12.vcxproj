@@ -150,10 +150,12 @@
     <ClCompile Include="Src\PSOManager.cpp" />
     <ClCompile Include="Src\RenderingFramework.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
+    <ClCompile Include="Src\ResourceCreateCommand.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
     <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\SwapChain.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
+    <ClCompile Include="Src\TextureLoader.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
     <ClCompile Include="Src\Window.cpp" />
@@ -194,12 +196,14 @@
     <ClInclude Include="Src\Render.h" />
     <ClInclude Include="Src\RenderingFramework.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
+    <ClInclude Include="Src\ResourceCreateCommand.h" />
     <ClInclude Include="Src\RootSignature.h" />
     <ClInclude Include="Src\ShaderByte.h" />
     <ClInclude Include="Src\SwapChain.h" />
     <ClInclude Include="Src\SystemParameters.h" />
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\Texture.h" />
+    <ClInclude Include="Src\TextureLoader.h" />
     <ClInclude Include="Src\TimeCheck.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\Window.h" />

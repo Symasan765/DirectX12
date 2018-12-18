@@ -168,6 +168,7 @@
     <ClInclude Include="Src\CommandObject.h" />
     <ClInclude Include="Src\CommandQueue.h" />
     <ClInclude Include="Src\CommandSystem.h" />
+    <ClInclude Include="Src\ConstantBuffer.h" />
     <ClInclude Include="Src\DepthStencilView.h" />
     <ClInclude Include="Src\DescHandleStep.h" />
     <ClInclude Include="Src\DescriptorBase.h" />

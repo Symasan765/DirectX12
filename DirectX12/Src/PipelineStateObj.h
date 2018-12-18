@@ -12,8 +12,7 @@
 class cPipelineStateObj
 {
 public:
-	cPipelineStateObj(std::string psoName);
-	~cPipelineStateObj() = default;
+	friend class cPSOManager;
 	void CreatePipelineState();
 
 	// 他の設定項目への対応は暫定的にオブジェクト自体を渡して行う
@@ -34,6 +33,8 @@ public:
 		return m_RtvFormat;
 	};
 private:
+	cPipelineStateObj(std::string psoName);	// cPSOManagerクラスから作成する
+	~cPipelineStateObj() = default;
 	//=====以下の関数は設定必須======
 	void RenderTargetSetting(DXGI_FORMAT* format, unsigned RTNum);
 	void ShaderBytecodeSetting(ID3D10Blob* vs, ID3D10Blob* ps, ID3D10Blob* ds = nullptr, ID3D10Blob* hs = nullptr, ID3D10Blob* gs = nullptr);

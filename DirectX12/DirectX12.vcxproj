@@ -146,6 +146,7 @@
     <ClCompile Include="Src\ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\PSOManager.cpp" />
+    <ClCompile Include="Src\RenderingFramework.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
     <ClCompile Include="Src\ShaderByte.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\PSOManager.h" />
     <ClInclude Include="Src\Render.h" />
+    <ClInclude Include="Src\RenderingFramework.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
     <ClInclude Include="Src\RootSignature.h" />
     <ClInclude Include="Src\ShaderByte.h" />

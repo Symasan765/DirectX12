@@ -11,6 +11,7 @@ cDrawPipeline::cDrawPipeline()
 	m_FenceObj = std::make_unique<cFenceObj>();
 	m_RtvResourceBarrier = std::make_unique<cResourceBarrier>();
 	m_RtvResourceBarrier->SetState(D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	m_RenderingFramework = std::make_unique<cRenderingFramework>();
 }
 
 cDrawPipeline::~cDrawPipeline()

@@ -4,6 +4,7 @@
 #include "CommandSystem.h"
 #include "FenceObj.h"
 #include "ResourceBarrier.h"
+#include "RenderingFramework.h"
 
 class cDrawPipeline
 {
@@ -29,4 +30,5 @@ private:
 	std::shared_ptr<cCommandSystem> m_CommandSystem;
 	std::unique_ptr<cFenceObj> m_FenceObj;
 	std::unique_ptr<cResourceBarrier> m_RtvResourceBarrier;
+	std::unique_ptr<cRenderingFramework> m_RenderingFramework;
 };

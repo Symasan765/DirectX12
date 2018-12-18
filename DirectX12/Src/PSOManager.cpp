@@ -1,7 +1,5 @@
 #include "PSOManager.h"
 
-std::unordered_map<std::string, std::shared_ptr<cPipelineStateObj>> cPSOManager::m_PsoMap;
-
 std::shared_ptr<cPipelineStateObj> cPSOManager::RequestPSO(std::string psoName)
 {
 	auto itr = m_PsoMap.find(psoName);        // "xyz" ‚ªİ’è‚³‚ê‚Ä‚¢‚é‚©H

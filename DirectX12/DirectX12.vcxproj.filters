@@ -37,6 +37,9 @@
     <Filter Include="Library\ImGUI">
       <UniqueIdentifier>{1f7a3dcb-c9b1-4dba-9760-dccfcbf37d3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{908a0444-8cd9-4ff8-afc3-4c1a34af61fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Src\RenderingFramework.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Texture.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="Src\RenderingFramework.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Texture.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

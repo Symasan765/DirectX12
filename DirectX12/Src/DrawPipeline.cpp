@@ -6,8 +6,8 @@
 
 cDrawPipeline::cDrawPipeline()
 {
-	m_Queue = std::make_unique<cCommandQueue>();
-	m_CommandSystem = std::make_unique<cCommandSystem>();
+	m_Queue = std::make_shared<cCommandQueue>();
+	m_CommandSystem = std::make_shared<cCommandSystem>();
 	m_FenceObj = std::make_unique<cFenceObj>();
 	m_RtvResourceBarrier = std::make_unique<cResourceBarrier>();
 	m_RtvResourceBarrier->SetState(D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);

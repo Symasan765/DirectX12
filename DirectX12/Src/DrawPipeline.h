@@ -25,8 +25,8 @@ private:
 	void ExeImGUI(int frameIndex);
 	void ExeEnd(int frameIndex);
 
-	std::unique_ptr<cCommandQueue> m_Queue;
-	std::unique_ptr<cCommandSystem> m_CommandSystem;
+	std::shared_ptr<cCommandQueue> m_Queue;
+	std::shared_ptr<cCommandSystem> m_CommandSystem;
 	std::unique_ptr<cFenceObj> m_FenceObj;
 	std::unique_ptr<cResourceBarrier> m_RtvResourceBarrier;
 };

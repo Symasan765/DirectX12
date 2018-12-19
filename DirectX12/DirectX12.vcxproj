@@ -86,10 +86,10 @@
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\work\DirectX12\packages\Assimp\include;C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\lib\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\work\DirectX12\packages\Assimp\lib\x64;C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\lib\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,12 +115,12 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\work\DirectX12\packages\Assimp\include;C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\work\DirectX12\packages\Assimp\lib\x64;C:\work\DirectX12\packages\directxtk12_desktop_2015.2018.11.20.1\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -10,8 +10,7 @@
 /// </summary>
 class cTexture {
 public:
-	cTexture(D3D12_DESCRIPTOR_HEAP_FLAGS flag);			// flag変数はどこのシェーダから読めるようにするか
-	cTexture();
+	cTexture(D3D12_DESCRIPTOR_HEAP_FLAGS flag = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);			// flag変数はどこのシェーダから読めるようにするか
 	~cTexture() = default;
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescriptorHeap();
 	inline Microsoft::WRL::ComPtr<ID3D12Resource> GetTextureResource() { return m_pTex; };

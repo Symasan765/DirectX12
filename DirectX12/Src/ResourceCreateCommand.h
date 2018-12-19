@@ -18,7 +18,7 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> GetAlloc();
 	Microsoft::WRL::ComPtr<ID3D12CommandQueue> GetQueue();
 private:
-	std::unique_ptr<cCommandAllocator> m_Alloc;
-	std::unique_ptr<cCommandList> m_List;
-	std::unique_ptr<cCommandQueue> m_Queue;
+	std::shared_ptr<cCommandAllocator> m_Alloc;
+	std::shared_ptr<cCommandList> m_List;
+	std::shared_ptr<cCommandQueue> m_Queue;
 };

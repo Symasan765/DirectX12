@@ -40,6 +40,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{908a0444-8cd9-4ff8-afc3-4c1a34af61fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{da3554f3-52ed-494a-a11a-ad80e762653f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="Src\ModelManager.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TestScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="Src\ModelManager.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\TestScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

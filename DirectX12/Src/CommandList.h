@@ -11,7 +11,7 @@ public:
 	cCommandList(Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAlloc);
 	~cCommandList() = default;
 
-	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetListPtr(int no) { return m_CommandList[no]; };
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetListPtr(int no) { return m_CommandList[no]; };
 private:
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandList[Render::g_LatencyNum];
 };

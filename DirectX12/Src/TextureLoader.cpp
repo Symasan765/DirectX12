@@ -7,10 +7,15 @@
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
-std::unique_ptr<cResourceCreateCommand> cTextureLoader::m_Command;
+std::shared_ptr<cResourceCreateCommand> cTextureLoader::m_Command;
+bool cTextureLoader::m_InitFlag = false;
 
 void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * texture)
 {
+	if (m_InitFlag == false) {
+		Init();
+	}
+
 	ComPtr<ID3D12Resource> textureUploadHeap;		// 一時変数でよし
 	ID3D12DescriptorHeap* srvHeap = texture->GetDescriptorHeap().Get();
 	ID3D12Resource* tex = texture->GetTextureResource().Get();
@@ -27,9 +32,10 @@ void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * textur
 	texture->SetFilePath(fileName);	// パスを登録しておく
 }
 
-cTextureLoader::cTextureLoader()
+void cTextureLoader::Init()
 {
-	m_Command = std::make_unique<cResourceCreateCommand>();
+	m_Command = std::make_shared<cResourceCreateCommand>();
+	m_InitFlag = true;
 }
 
 void cTextureLoader::ResourceLoading(std::wstring& wStr, ID3D12Resource*& tex, ComPtr<ID3D12Resource>& textureUploadHeap, const UINT subresoucesize)
@@ -57,10 +63,11 @@ void cTextureLoader::ResourceLoading(std::wstring& wStr, ID3D12Resource*& tex, C
 		nullptr,
 		IID_PPV_ARGS(&textureUploadHeap)));
 
-	m_Command->GetList()->Reset(m_Command->GetAlloc().Get(), nullptr);
+	auto commandList = m_Command.get()->GetList();
+	commandList->Reset(m_Command->GetAlloc().Get(), nullptr);
 
 	// サブリソースの更新
-	UpdateSubresources(m_Command->GetList().Get(),
+	UpdateSubresources(commandList.Get(),
 		tex,										// 更新先アドレス
 		textureUploadHeap.Get(),		// 中間アドレス
 		0,											// オフセット値

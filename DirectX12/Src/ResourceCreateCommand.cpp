@@ -2,9 +2,9 @@
 
 cResourceCreateCommand::cResourceCreateCommand()
 {
-	m_Alloc = std::make_unique<cCommandAllocator>();
-	m_Queue = std::make_unique<cCommandQueue>();
-	m_List = std::make_unique<cCommandList>(m_Alloc->GetAllocator(0));
+	m_Alloc = std::make_shared<cCommandAllocator>();
+	m_Queue = std::make_shared<cCommandQueue>();
+	m_List = std::make_shared<cCommandList>(m_Alloc->GetAllocator(0));
 }
 
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cResourceCreateCommand::GetList()

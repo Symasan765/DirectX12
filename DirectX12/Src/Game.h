@@ -4,6 +4,7 @@
 #include "DirectX12.h"
 #include "DrawPipeline.h"
 #include "ImGUIManager.h"
+#include "TestScene.h"
 
 /// <summary>
 /// メイン関数で作成される全システムの核となるクラス
@@ -39,6 +40,7 @@ private:
 	cDirectX12* m_pDirectX12 = nullptr;
 	cDrawPipeline* m_pDrawPipeline = nullptr;
 	cImGUIManager* m_ImGUI = nullptr;
+	cTestScene* m_Test = nullptr;	// TODO 消す
 
 	// WinMain引数
 	HINSTANCE m_hInst;

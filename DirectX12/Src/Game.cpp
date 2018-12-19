@@ -31,6 +31,7 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	m_pWindow = new cDXWindow(hInst, m_pDrawPipeline->m_Queue->GetQueue());
 	m_pGameTime = new cGameTime;
 	m_ImGUI = new cImGUIManager;
+	m_Test = new cTestScene;
 }
 
 cGameSystem::~cGameSystem()
@@ -95,6 +96,7 @@ void cGameSystem::SystemUnInit()
 	SAFE_DELETE(m_pWindow);
 	SAFE_DELETE(m_pDrawPipeline);
 	SAFE_DELETE(m_ImGUI);
+	SAFE_DELETE(m_Test);
 }
 
 void cGameSystem::LoopBegin()

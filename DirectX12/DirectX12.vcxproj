@@ -162,6 +162,7 @@
     <ClCompile Include="Src\RootSignature.cpp" />
     <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\SwapChain.cpp" />
+    <ClCompile Include="Src\TestScene.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\TextureLoader.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Src\SwapChain.h" />
     <ClInclude Include="Src\SystemParameters.h" />
     <ClInclude Include="Src\Main.h" />
+    <ClInclude Include="Src\TestScene.h" />
     <ClInclude Include="Src\Texture.h" />
     <ClInclude Include="Src\TextureLoader.h" />
     <ClInclude Include="Src\TimeCheck.h" />

@@ -12,7 +12,7 @@ public:
 
 	std::shared_ptr <cCommandObject> GetBeginCommand() { return m_pBeginCommand; };
 	std::shared_ptr <cCommandObject> GetEndCommand() { return m_pEndCommand; };
-
+	std::shared_ptr <cCommandObject[]> GetGameCommand() { return m_pGameCommand; }
 	void AllocReset(int frameIndex);
 private:
 	std::shared_ptr <cCommandObject[]> m_pGameCommand;		// メインゲームで利用するコマンド群

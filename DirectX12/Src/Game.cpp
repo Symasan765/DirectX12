@@ -92,11 +92,11 @@ void cGameSystem::AppUnInit()
 void cGameSystem::SystemUnInit()
 {
 	SAFE_DELETE(m_pGameTime);
-	SAFE_DELETE(m_pDirectX12);
 	SAFE_DELETE(m_pWindow);
-	SAFE_DELETE(m_pDrawPipeline);
 	SAFE_DELETE(m_ImGUI);
 	SAFE_DELETE(m_Test);
+	SAFE_DELETE(m_pDrawPipeline);
+	SAFE_DELETE(m_pDirectX12);
 }
 
 void cGameSystem::LoopBegin()

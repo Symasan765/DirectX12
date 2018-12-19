@@ -17,6 +17,7 @@ cDrawPipeline::cDrawPipeline()
 cDrawPipeline::~cDrawPipeline()
 {
 	m_FenceObj->Signal(m_Queue->GetQueue(), cGameTime::TortalFrame());
+	Sleep(100);	// TODO これをいれないと描画処理終了前にPSOなどのオブジェクトが破棄されErrorを起こす
 }
 
 void cDrawPipeline::DrawBigen(int frameIndex)
@@ -83,7 +84,7 @@ void cDrawPipeline::ExeBigen(int frameIndex)
 
 void cDrawPipeline::ExeGame(int frameIndex)
 {
-	m_RenderingFramework->Execute(m_Queue, frameIndex);
+	m_RenderingFramework->Execute(m_CommandSystem,m_Queue, frameIndex);
 }
 
 void cDrawPipeline::ExeImGUI(int frameIndex)

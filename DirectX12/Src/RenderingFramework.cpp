@@ -1,5 +1,6 @@
 #include "RenderingFramework.h"
 #include "DXMath.h"
+#include "Utility.h"
 
 cRenderingFramework::cRenderingFramework()
 {
@@ -9,12 +10,52 @@ cRenderingFramework::cRenderingFramework()
 
 void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, int frameIndex)
 {
+	auto commandSystemLists = m_CommandSystem->GetGameCommand();
+	
+	for (int i = 0; i < 4; i++) {
+		auto commandList = commandSystemLists[i].GetList(frameIndex);
+		auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
+		CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
 
+		// TODO ローカルで保存せずにグローバルで取得できるようにする
+		D3D12_VIEWPORT viewport = {};
+		viewport.Width = (float)1920;
+		viewport.Height = (float)1080;
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+		commandList->RSSetViewports(1, &viewport);
+		D3D12_RECT scissor = {};
+		scissor.right = (LONG)1920;
+		scissor.bottom = (LONG)1080;
+		commandList->RSSetScissorRects(1, &scissor);
+
+		// TODO 描画コンポーネントから使用するPSOを識別して変更する
+		auto pso = m_PsoManager->RequestPSO("Main");
+		commandList->SetGraphicsRootSignature(pso->GetSettingRootSignature()->GetRootSignature().Get());
+		commandList->SetPipelineState(pso->GetPipelineState().Get());
+
+		commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+
+		commandList->Close();
+	}
 }
 
-void cRenderingFramework::Execute(std::shared_ptr<cCommandQueue> queue, int frameIndex)
+void cRenderingFramework::Execute(std::shared_ptr<cCommandSystem> m_CommandSystem, std::shared_ptr<cCommandQueue> queue, int frameIndex)
 {
+	auto commandSystemLists = m_CommandSystem->GetGameCommand();
+	int i = 1;		// TODO テストで二番目のリストを使用する
 
+	auto commandList = commandSystemLists[i].GetList(frameIndex);
+	auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
+
+	ID3D12CommandList* list[Render::g_ThreadNum] = {};
+
+	for (int i = 0; i < Render::g_ThreadNum; i++) {
+		list[i] = commandSystemLists[i].GetList(frameIndex).Get();
+	}
+
+	queue->Exe(list, Render::g_ThreadNum);
 }
 
 void cRenderingFramework::CreatePSO()

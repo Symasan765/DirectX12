@@ -171,6 +171,9 @@
     <ClCompile Include="Src\AssimpLoader.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ModelManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="Src\AssimpLoader.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ModelManager.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

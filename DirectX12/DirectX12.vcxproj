@@ -152,6 +152,7 @@
     <ClCompile Include="Src\InstVertexBuffer.cpp" />
     <ClCompile Include="Src\Material.cpp" />
     <ClCompile Include="Src\Mesh3D.cpp" />
+    <ClCompile Include="Src\ModelManager.cpp" />
     <ClCompile Include="Src\ModelResource.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\PSOManager.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Src\AssimpLoader.h" />
     <ClInclude Include="Src\Behavior.h" />
     <ClInclude Include="Src\BoneStruct.h" />
+    <ClInclude Include="Src\ModelManager.h" />
     <ClInclude Include="Src\CommandAllocator.h" />
     <ClInclude Include="Src\CommandList.h" />
     <ClInclude Include="Src\CommandObject.h" />

@@ -1,7 +1,7 @@
 # DirectX12ドキュメント
 
 ## 現在の目標！
-PSOマネージャーの作成とRenderingFrameworkの作成
+RenderingFramework上での描画テストを行う。その後、描画コンポーネントと管理システムを構築して本実装に切り替える。
 
 ## 必要な機能
 PBRを用いたForward+レンダリングを行う。

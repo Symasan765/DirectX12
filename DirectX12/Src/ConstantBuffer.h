@@ -20,7 +20,7 @@ public:
 private:
 	void CreateDescriptorHeapCB();
 	void CreateConstantBuffer();
-	// TODO 定数バッファ本体の保持
+	
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_DescHeapCbvSrvUav[Render::g_LatencyNum];
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_ConstantBuffer;
 	unsigned int m_BufferSize;

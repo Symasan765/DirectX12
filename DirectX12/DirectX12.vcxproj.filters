@@ -150,6 +150,24 @@
     <ClCompile Include="Src\ResourceCreateCommand.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ModelResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphic3D.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\InstVertexBuffer.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Mesh3D.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Material.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Animation3D.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -294,6 +312,30 @@
       <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="Src\ConstantBuffer.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ModelResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphic3D.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\BoneStruct.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\InstVertexBuffer.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Mesh3D.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Material.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Animation3D.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\VertexStruct.h">
       <Filter>Struct</Filter>
     </ClInclude>
   </ItemGroup>

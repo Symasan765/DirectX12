@@ -16,3 +16,14 @@ UINT cModelManager::Load(std::string fileName)
 
 	return ID;
 }
+
+cModelResource * cModelManager::Read(UINT ResourceID)
+{
+	return m_ResourceMap[ResourceID].get();
+}
+
+void cModelManager::Draw(int frameIndex, DirectX::XMFLOAT4X4* matPtr, UINT ResourceID, ID3D12GraphicsCommandList * cmdList, bool texDrawFlag, UINT RootParameterIndex, UINT InstanceCount)
+{
+	m_ResourceMap[ResourceID]->Draw(frameIndex,matPtr, cmdList, texDrawFlag, RootParameterIndex, InstanceCount);
+}
+

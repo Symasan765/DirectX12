@@ -1,11 +1,28 @@
 #include "RenderingFramework.h"
 #include "DXMath.h"
 #include "Utility.h"
+#include "DXWindow.h"
+#include "ModelManager.h"
+
+using namespace DirectX;
 
 cRenderingFramework::cRenderingFramework()
 {
 	m_PsoManager = std::make_unique<cPSOManager>();
 	CreatePSO();
+
+	// TODO ここ消す
+	XMMATRIX  viewMat, projMat;
+	viewMat = XMMatrixLookAtLH({ 0, 0.5f, -10.5f }, { 0, 0.0f, 0 }, { 0, 1, 0 });
+	projMat = XMMatrixPerspectiveFovLH(45, (float)1920 / 1080, 0.01f, 50.0f);
+	auto mvpMat = XMMatrixTranspose(viewMat * projMat);
+
+	auto worldTransMat = XMMatrixTranspose(viewMat * projMat);
+
+	XMStoreFloat4x4(&m_ConstBuf.data.worldViewProjMatrix, mvpMat);
+	XMStoreFloat4x4(&m_ConstBuf.data.worldMatrix, worldTransMat);
+	//cModelManager::Load("Link.x");
+	// =============================================
 }
 
 void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, int frameIndex)
@@ -16,6 +33,9 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 		auto commandList = commandSystemLists[i].GetList(frameIndex);
 		auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
 		CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
+
+		commandList->OMSetRenderTargets(1, &cDXWindow::GetBuuferData().descHandleRtv, true, &cDXWindow::GetBuuferData().descHandleDsv);
+
 
 		// TODO ローカルで保存せずにグローバルで取得できるようにする
 		D3D12_VIEWPORT viewport = {};
@@ -35,7 +55,18 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 		commandList->SetPipelineState(pso->GetPipelineState().Get());
 
 		commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+		
+		if (i == 1) {
+			m_ConstBuf.Upload();
+			DirectX::XMFLOAT4X4 mats[Render::g_MaxInstNum];
+			DirectX::XMStoreFloat4x4(&mats[0], DirectX::XMMatrixScaling(10.0f, 10.0f, 10.0f));
+			auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap(frameIndex)->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap(frameIndex) };
+			commandList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
+			commandList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
+			cModelManager manager;
+			manager.Draw(frameIndex,mats, 0, commandList.Get(), true, 1, 1);		// TODO 仮実装
+		}
 
 		commandList->Close();
 	}
@@ -44,10 +75,6 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 void cRenderingFramework::Execute(std::shared_ptr<cCommandSystem> m_CommandSystem, std::shared_ptr<cCommandQueue> queue, int frameIndex)
 {
 	auto commandSystemLists = m_CommandSystem->GetGameCommand();
-	int i = 1;		// TODO テストで二番目のリストを使用する
-
-	auto commandList = commandSystemLists[i].GetList(frameIndex);
-	auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
 
 	ID3D12CommandList* list[Render::g_ThreadNum] = {};
 
@@ -67,8 +94,8 @@ void cRenderingFramework::CreatePSO()
 	auto& format = pso->GetSettingRtvFormat();
 
 	rootSig->AddSamplers(0);
-	rootSig->AddNumCBV(4);
-	rootSig->AddNumSRV(1);
+	rootSig->AddCBV(0);
+	rootSig->AddSRV(0);
 
 	shaderByte->CompileFromFile("HLSL/PBR.hlsl", "VSMain", "PSMain");
 

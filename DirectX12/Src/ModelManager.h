@@ -11,6 +11,8 @@ public:
 	~cModelManager() = default;
 
 	static UINT Load(std::string fileName);
+	static cModelResource* Read(UINT ResourceID);
+	void Draw(int frameIndex,DirectX::XMFLOAT4X4* matPtr, UINT ResourceID, ID3D12GraphicsCommandList * cmdList, bool texDrawFlag, UINT RootParameterIndex, UINT InstanceCount);
 private:
 	static std::unordered_map<UINT, std::unique_ptr<cModelResource>> m_ResourceMap;
 };

@@ -2,6 +2,14 @@
 #include "CommandSystem.h"
 #include "CommandQueue.h"
 #include "PSOManager.h"
+// ↓消す
+#include "ConstantBuffer.h"
+#include "DXMath.h"
+
+struct CBuffer {
+	DirectX::XMFLOAT4X4 worldViewProjMatrix;
+	DirectX::XMFLOAT4X4 worldMatrix;
+};
 
 /// <summary>
 /// ゲームオブジェクトの描画を担当する描画の最も要となるクラス
@@ -17,4 +25,5 @@ public:
 private:
 	void CreatePSO();		// この中でプログラム中で必要なPSOを作成する
 	std::unique_ptr<cPSOManager> m_PsoManager;
+	cConstBuf<CBuffer> m_ConstBuf;
 };

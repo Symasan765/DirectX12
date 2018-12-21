@@ -43,6 +43,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{da3554f3-52ed-494a-a11a-ad80e762653f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{b6b6062f-387e-4f59-9bfe-30b4b618b042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -358,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="Src\TestScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ComponentBase.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Behavior.h"
+class cBehavior;
 
 namespace {
 	// ComponentŒ^‚Ì”‚ğæ“¾‚·‚é

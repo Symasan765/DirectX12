@@ -166,6 +166,7 @@
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\TextureLoader.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
+    <ClCompile Include="Src\Transform.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
     <ClCompile Include="Src\Window.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Src\Texture.h" />
     <ClInclude Include="Src\TextureLoader.h" />
     <ClInclude Include="Src\TimeCheck.h" />
+    <ClInclude Include="Src\Transform.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\VertexStruct.h" />
     <ClInclude Include="Src\Window.h" />

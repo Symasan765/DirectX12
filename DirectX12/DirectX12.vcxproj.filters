@@ -46,6 +46,9 @@
     <Filter Include="Component">
       <UniqueIdentifier>{b6b6062f-387e-4f59-9bfe-30b4b618b042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Base">
+      <UniqueIdentifier>{1c08178a-d8b9-448e-9a7b-383904d034f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -182,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="Src\TestScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Transform.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -363,6 +369,9 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Src\ComponentBase.h">
+      <Filter>Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Transform.h">
       <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>

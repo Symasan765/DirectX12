@@ -1,5 +1,11 @@
 #include "Behavior.h"
 
+cBehavior::cBehavior()
+{
+	// 必ずトランスフォームコンポーネントは接続してアドレスを持っておく。
+	m_Transform = AddCommponent<cTransform>();
+}
+
 cBehavior::~cBehavior()
 {
 

@@ -2,6 +2,7 @@
 #include "ComponentBase.h"
 #include <unordered_map>
 #include <memory>
+#include "Transform.h"
 
 /// <summary>
 /// ゲーム中の基本的なすべてのオブジェクトに付与するためのクラス。
@@ -14,7 +15,7 @@ public:
 		EPaused,
 		EDead,
 	};
-	cBehavior() = default;
+	cBehavior();
 	virtual ~cBehavior();
 
 	// 更新処理関数
@@ -36,7 +37,8 @@ public:
 private:
 	State m_State;
 	std::unordered_map<int, std::shared_ptr<cComponentBase>> m_ComponentMap;
-	// TODO transform系の機能を追加する
+protected:
+	cTransform* m_Transform;		// unordered_map内のshared_ptrで管理されている生アドレスなので解放の必要なし
 };
 
 template<typename T>

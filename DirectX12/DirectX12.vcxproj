@@ -152,11 +152,13 @@
     <ClCompile Include="Src\InstVertexBuffer.cpp" />
     <ClCompile Include="Src\Material.cpp" />
     <ClCompile Include="Src\Mesh3D.cpp" />
+    <ClCompile Include="Src\MeshRenderer.cpp" />
     <ClCompile Include="Src\ModelManager.cpp" />
     <ClCompile Include="Src\ModelResource.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\PSOManager.cpp" />
     <ClCompile Include="Src\RenderingFramework.cpp" />
+    <ClCompile Include="Src\RenderingOrder.cpp" />
     <ClCompile Include="Src\ResourceBarrier.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="Src\Behavior.h" />
     <ClInclude Include="Src\BoneStruct.h" />
     <ClInclude Include="Src\ComponentBase.h" />
+    <ClInclude Include="Src\MeshRenderer.h" />
     <ClInclude Include="Src\ModelManager.h" />
     <ClInclude Include="Src\CommandAllocator.h" />
     <ClInclude Include="Src\CommandList.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="Src\PSOManager.h" />
     <ClInclude Include="Src\Render.h" />
     <ClInclude Include="Src\RenderingFramework.h" />
+    <ClInclude Include="Src\RenderingOrder.h" />
     <ClInclude Include="Src\ResourceBarrier.h" />
     <ClInclude Include="Src\ResourceCreateCommand.h" />
     <ClInclude Include="Src\RootSignature.h" />

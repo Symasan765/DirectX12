@@ -189,6 +189,12 @@
     <ClCompile Include="Src\Transform.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="Src\MeshRenderer.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RenderingOrder.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -373,6 +379,12 @@
     </ClInclude>
     <ClInclude Include="Src\Transform.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MeshRenderer.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RenderingOrder.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

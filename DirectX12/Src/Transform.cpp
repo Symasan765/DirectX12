@@ -4,7 +4,19 @@ using namespace DirectX;
 
 cTransform::cTransform(cBehavior * owner) : cComponentBase(owner)
 {
+	for (int i = 0; i < Render::g_LatencyNum; i++) {
+		m_Position[i] = { 0.0f,0.0f,0.0f,1.0f };
+		m_Rotation[i] = { 0.0f,0.0f,0.0f,0.0f };
+		m_Scale[i] = { 1.0f,1.0f,1.0f,0.0f };
+	}
+}
 
+void cTransform::Update(float deltaTime)
+{
+	// ひとつ前のフレームのデータをコピーする
+	m_Position[cGameTime::FrameIndex()] = m_Position[cGameTime::RenderIndex()];
+	m_Rotation[cGameTime::FrameIndex()] = m_Rotation[cGameTime::RenderIndex()];
+	m_Scale[cGameTime::FrameIndex()] = m_Scale[cGameTime::RenderIndex()];
 }
 
 DirectX::XMFLOAT4X4 cTransform::ToWorldMatrix(int frameIndex)

@@ -12,7 +12,7 @@ public:
 	cTransform(cBehavior* owner);
 	~cTransform() = default;
 
-	void Update(float deltaTime) {};
+	void Update(float deltaTime);
 	void Start() {};
 
 	DirectX::XMFLOAT4X4 ToWorldMatrix(int frameIndex);

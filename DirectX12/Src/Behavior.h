@@ -48,6 +48,7 @@ inline T * cBehavior::AddCommponent()
 	if (itr == m_ComponentMap.end()) {
 		//İ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Ìˆ—
 		std::shared_ptr<cComponentBase> p(new T(this));
+		p->Start();
 		m_ComponentMap[comID] = (p);
 	}
 	return static_cast<T*>(m_ComponentMap[comID].get());

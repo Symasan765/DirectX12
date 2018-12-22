@@ -1,6 +1,7 @@
 #pragma once
 #include "ComponentBase.h"
 #include <unordered_map>
+#include <memory>
 
 /// <summary>
 /// ゲーム中の基本的なすべてのオブジェクトに付与するためのクラス。
@@ -13,7 +14,7 @@ public:
 		EPaused,
 		EDead,
 	};
-	cBehavior();
+	cBehavior() = default;
 	virtual ~cBehavior();
 
 	// 更新処理関数
@@ -34,6 +35,45 @@ public:
 
 private:
 	State m_State;
-	// TODO コンポーネントベースのテンプレート問題を解決する　std::unordered_map<int, cComponentBase*> m_ComponentMap;
+	std::unordered_map<int, std::shared_ptr<cComponentBase>> m_ComponentMap;
 	// TODO transform系の機能を追加する
 };
+
+template<typename T>
+inline T * cBehavior::AddCommponent()
+{
+	// まずmapにコンポーネントがついているか調べる
+	int comID = cComponentBase::GetID<T>();
+	auto itr = m_ComponentMap.find(comID);        // "xyz" が設定されているか？
+	if (itr == m_ComponentMap.end()) {
+		//設定されていない場合の処理
+		std::shared_ptr<cComponentBase> p(new T(this));
+		m_ComponentMap[comID] = (p);
+	}
+	return static_cast<T*>(m_ComponentMap[comID].get());
+}
+
+template<typename T>
+inline void cBehavior::RemoveCommponent()
+{
+	// まずmapにコンポーネントがついているか調べる
+	int comID = cComponentBase::GetID<T>();
+	auto itr = m_ComponentMap.find(comID);        // "xyz" が設定されているか？
+	if (itr != m_ComponentMap.end()) {
+		//設定されている場合の処理
+		m_ComponentMap.erase(itr);
+	}
+}
+
+template<typename T>
+inline T * cBehavior::GetCommponent()
+{
+	// まずmapにコンポーネントがついているか調べる
+	int comID = cComponentBase::GetID<T>();
+	auto itr = m_ComponentMap.find(comID);        // "xyz" が設定されているか？
+	if (itr == m_ComponentMap.end()) {
+		// 設定されていない
+		return nullptr;
+	}
+	return static_cast<T*>(m_ComponentMap[comID].get());
+}

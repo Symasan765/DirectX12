@@ -2,41 +2,43 @@
 class cBehavior;
 
 namespace {
-	// Component型の数を取得する
+	// Component型の数を保持する
 	int g_TotalComponentTypeNum = 0;
 }
 
 /// <summary>
 /// 継承する先のコンポーネント型を渡して作成する
 /// </summary>
-template <typename T>
 class cComponentBase
 {
 public:
 	virtual ~cComponentBase() = default;
-	static int GetID() { return m_ID; };
-
-	virtual bool Start() = 0;
 	virtual void Update() = 0;
+	virtual void Start() = 0;
 
+	template <typename T>
+	static int GetID();
 protected:
-	cComponentBase(cBehavior* owner);
+	cComponentBase(cBehavior * owner)
+	{
+		m_Owner = owner;
+	}
 
 	// コンポーネントを所持するアクター
 	cBehavior* m_Owner;
-	static int m_ID;
 };
 
-// その型のIDを保持するstatic変数
-template <typename T>
-int cComponentBase<T>::m_ID = -1;
-
+/// <summary>
+/// 必ずビヘイビアの追加関数内で呼ばれることになる
+/// </summary>
 template<typename T>
-inline cComponentBase<T>::cComponentBase(cBehavior * owner) : m_Owner(owner)
+inline int cComponentBase::GetID()
 {
-	// 未初期化。型のIDを取得する
-	if (m_ID == -1) {
-		m_ID = g_TotalComponentTypeNum;
+	static int ID = -1;		// テンプレートの型ごとに用意される
+	if (ID == -1) {
+		// 呼び出された型順にIDが振られることになる
+		ID = g_TotalComponentTypeNum;
 		g_TotalComponentTypeNum++;
 	}
+	return ID;
 }

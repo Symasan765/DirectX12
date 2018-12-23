@@ -1,14 +1,18 @@
 #include "Behavior.h"
+#include "UpdateOrder.h"
 
 cBehavior::cBehavior()
 {
+	// システムにオブジェクトを登録する
+	cUpdateOrder::PushBehavior(this);
+
 	// 必ずトランスフォームコンポーネントは接続してアドレスを持っておく。
 	m_Transform = AddCommponent<cTransform>();
 }
 
 cBehavior::~cBehavior()
 {
-
+	m_State = EDead;
 }
 
 void cBehavior::UpdateBehavior(float deltaTime)

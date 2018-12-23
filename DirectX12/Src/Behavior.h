@@ -33,9 +33,9 @@ public:
 	template <typename T>
 	T* GetCommponent();
 
-
+	State GetState() { return m_State; };
 private:
-	State m_State;
+	State m_State = EActive;
 	std::unordered_map<int, std::shared_ptr<cComponentBase>> m_ComponentMap;
 protected:
 	cTransform* m_Transform;		// unordered_map内のshared_ptrで管理されている生アドレスなので解放の必要なし

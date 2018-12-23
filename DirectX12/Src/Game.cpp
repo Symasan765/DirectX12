@@ -8,7 +8,7 @@
 /// </summary>
 void cGameSystem::GameUpdate()
 {
-	
+	m_UpdateOrder->Update(cGameTime::DeltaTime());
 }
 
 void cGameSystem::CommandRender()
@@ -32,6 +32,7 @@ cGameSystem::cGameSystem(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	m_pGameTime = new cGameTime;
 	m_ImGUI = new cImGUIManager;
 	m_Test = new cTestScene;
+	m_UpdateOrder = new cUpdateOrder;
 }
 
 cGameSystem::~cGameSystem()
@@ -91,6 +92,7 @@ void cGameSystem::AppUnInit()
 
 void cGameSystem::SystemUnInit()
 {
+	SAFE_DELETE(m_UpdateOrder);
 	SAFE_DELETE(m_pGameTime);
 	SAFE_DELETE(m_pWindow);
 	SAFE_DELETE(m_ImGUI);

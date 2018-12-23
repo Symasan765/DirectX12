@@ -195,6 +195,9 @@
     <ClCompile Include="Src\RenderingOrder.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Src\UpdateOrder.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -384,6 +387,9 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Src\RenderingOrder.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\UpdateOrder.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>

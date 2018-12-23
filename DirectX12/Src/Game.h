@@ -4,6 +4,7 @@
 #include "DirectX12.h"
 #include "DrawPipeline.h"
 #include "ImGUIManager.h"
+#include "UpdateOrder.h"
 #include "TestScene.h"
 
 /// <summary>
@@ -40,6 +41,7 @@ private:
 	cDirectX12* m_pDirectX12 = nullptr;
 	cDrawPipeline* m_pDrawPipeline = nullptr;
 	cImGUIManager* m_ImGUI = nullptr;
+	cUpdateOrder* m_UpdateOrder = nullptr;
 	cTestScene* m_Test = nullptr;	// TODO è¡Ç∑
 
 	// WinMainà¯êî

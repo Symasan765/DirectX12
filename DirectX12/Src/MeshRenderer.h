@@ -14,7 +14,7 @@ public:
 	void Update(float deltaTime);
 	void Start() {};
 
-	void Road(std::string fileName, std::string psoName);
+	void Load(std::string fileName, std::string psoName);
 	int ResourceID() { return m_ResourceID; };
 private:
 	int m_ResourceID = -1;

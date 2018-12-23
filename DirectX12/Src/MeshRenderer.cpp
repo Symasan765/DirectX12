@@ -13,7 +13,7 @@ void cMeshRenderer::Update(float deltaTime)
 	cRenderingOrder::AddRenderObj(this, cGameTime::FrameIndex());
 }
 
-void cMeshRenderer::Road(std::string fileName, std::string psoName)
+void cMeshRenderer::Load(std::string fileName, std::string psoName)
 {
 	m_ResourceID = cModelManager::Load(fileName);
 	m_PsoName = psoName;

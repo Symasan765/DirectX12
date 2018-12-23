@@ -19,5 +19,5 @@ public:
 	~cTestScene();
 
 private:
-
+	cPlayer m_Player;
 };

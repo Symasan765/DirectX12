@@ -26,6 +26,13 @@ protected:
 
 	// コンポーネントを所持するアクター
 	cBehavior* m_Owner;
+private:
+	// 新しいコンポーネントIDを保持している関数
+	static int NewID() {
+		static int ID = 0;
+		ID++;
+		return ID;
+	}
 };
 
 /// <summary>
@@ -37,8 +44,7 @@ inline int cComponentBase::GetID()
 	static int ID = -1;		// テンプレートの型ごとに用意される
 	if (ID == -1) {
 		// 呼び出された型順にIDが振られることになる
-		ID = g_TotalComponentTypeNum;
-		g_TotalComponentTypeNum++;
+		ID = NewID();
 	}
 	return ID;
 }

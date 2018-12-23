@@ -1,6 +1,8 @@
 #include "RenderingFramework.h"
 #include "DXMath.h"
 #include "Utility.h"
+
+#include "RenderingOrder.h"
 #include "DXWindow.h"
 #include "ModelManager.h"
 
@@ -28,7 +30,7 @@ cRenderingFramework::cRenderingFramework()
 void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, int frameIndex)
 {
 	auto commandSystemLists = m_CommandSystem->GetGameCommand();
-	
+	cRenderingOrder m_Order;
 	for (int i = 0; i < 4; i++) {
 		auto commandList = commandSystemLists[i].GetList(frameIndex);
 		auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
@@ -59,7 +61,7 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 		if (i == 1) {
 			m_ConstBuf.Upload();
 			DirectX::XMFLOAT4X4 mats[Render::g_MaxInstNum];
-			DirectX::XMStoreFloat4x4(&mats[0], DirectX::XMMatrixScaling(10.0f, 10.0f, 10.0f));
+			m_Order.RetrunWorldMatrix(mats, frameIndex);
 			auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap(frameIndex)->GetGPUDescriptorHandleForHeapStart();
 			ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap(frameIndex) };
 			commandList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
@@ -70,6 +72,7 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 
 		commandList->Close();
 	}
+	m_Order.ClearObjs(frameIndex);
 }
 
 void cRenderingFramework::Execute(std::shared_ptr<cCommandSystem> m_CommandSystem, std::shared_ptr<cCommandQueue> queue, int frameIndex)

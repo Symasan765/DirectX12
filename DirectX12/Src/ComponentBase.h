@@ -18,6 +18,8 @@ public:
 
 	template <typename T>
 	static int GetID();
+
+	cBehavior* GameObjct() { return m_Owner; };
 protected:
 	cComponentBase(cBehavior * owner)
 	{

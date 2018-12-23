@@ -34,6 +34,8 @@ public:
 	T* GetCommponent();
 
 	State GetState() { return m_State; };
+
+	cTransform* GetTransform() { return m_Transform; };
 private:
 	State m_State = EActive;
 	std::unordered_map<int, std::shared_ptr<cComponentBase>> m_ComponentMap;

@@ -49,6 +49,9 @@
     <Filter Include="Component\Base">
       <UniqueIdentifier>{1c08178a-d8b9-448e-9a7b-383904d034f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{89d9f547-759f-4dd5-9436-0a67bc255317}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Utility.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="Src\UpdateOrder.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SceneBase.cpp">
+      <Filter>Scene\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="Src\UpdateOrder.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SceneBase.h">
+      <Filter>Scene\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

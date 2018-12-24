@@ -162,6 +162,7 @@
     <ClCompile Include="Src\ResourceBarrier.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
+    <ClCompile Include="Src\SceneBase.cpp" />
     <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\SwapChain.cpp" />
     <ClCompile Include="Src\TestScene.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Src\ResourceBarrier.h" />
     <ClInclude Include="Src\ResourceCreateCommand.h" />
     <ClInclude Include="Src\RootSignature.h" />
+    <ClInclude Include="Src\SceneBase.h" />
     <ClInclude Include="Src\ShaderByte.h" />
     <ClInclude Include="Src\SwapChain.h" />
     <ClInclude Include="Src\SystemParameters.h" />

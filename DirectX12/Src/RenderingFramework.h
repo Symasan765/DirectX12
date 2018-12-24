@@ -23,6 +23,7 @@ public:
 	void Draw(std::shared_ptr<cCommandSystem> m_CommandSystem,int frameIndex);		// コマンド発行
 	void Execute(std::shared_ptr<cCommandSystem> m_CommandSystem, std::shared_ptr<cCommandQueue> queue, int frameIndex);					// コマンド実行
 private:
+	void OpaquePass(Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList, Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAlloc,int frameIndex);	// 不透明パス
 	void CreatePSO();		// この中でプログラム中で必要なPSOを作成する
 	std::unique_ptr<cPSOManager> m_PsoManager;
 	cConstBuf<CBuffer> m_ConstBuf;

@@ -30,47 +30,18 @@ cRenderingFramework::cRenderingFramework()
 void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, int frameIndex)
 {
 	auto commandSystemLists = m_CommandSystem->GetGameCommand();
-	cRenderingOrder m_Order;
+	// TODO スレッドごとに利用する関数を作成してマルチスレッド化させる
 	for (int i = 0; i < 4; i++) {
 		auto commandList = commandSystemLists[i].GetList(frameIndex);
 		auto commandAlloc = commandSystemLists[i].GetAllocator(frameIndex);
-		CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
-
-		commandList->OMSetRenderTargets(1, &cDXWindow::GetBuuferData().descHandleRtv, true, &cDXWindow::GetBuuferData().descHandleDsv);
-
-
-		// TODO ローカルで保存せずにグローバルで取得できるようにする
-		D3D12_VIEWPORT viewport = {};
-		viewport.Width = (float)1920;
-		viewport.Height = (float)1080;
-		viewport.MinDepth = 0.0f;
-		viewport.MaxDepth = 1.0f;
-		commandList->RSSetViewports(1, &viewport);
-		D3D12_RECT scissor = {};
-		scissor.right = (LONG)1920;
-		scissor.bottom = (LONG)1080;
-		commandList->RSSetScissorRects(1, &scissor);
-
-		// TODO 描画コンポーネントから使用するPSOを識別して変更する
-		auto pso = m_PsoManager->RequestPSO("Main");
-		commandList->SetGraphicsRootSignature(pso->GetSettingRootSignature()->GetRootSignature().Get());
-		commandList->SetPipelineState(pso->GetPipelineState().Get());
-
-		commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		
 		if (i == 1) {
-			m_ConstBuf.Upload();
-			DirectX::XMFLOAT4X4 mats[Render::g_MaxInstNum];
-			m_Order.RetrunWorldMatrix(1000,mats, frameIndex);
-			auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap(frameIndex)->GetGPUDescriptorHandleForHeapStart();
-			ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap(frameIndex) };
-			commandList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
-			commandList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
-			cModelManager manager;
-			manager.Draw(frameIndex,mats, 1000, commandList.Get(), true, 1, 1);		// TODO 仮実装
+			OpaquePass(commandList, commandAlloc, frameIndex);
 		}
-
-		commandList->Close();
+		else {
+			CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
+			commandList->Close();
+		}
 	}
 }
 
@@ -85,6 +56,56 @@ void cRenderingFramework::Execute(std::shared_ptr<cCommandSystem> m_CommandSyste
 	}
 
 	queue->Exe(list, Render::g_ThreadNum);
+}
+
+void cRenderingFramework::OpaquePass(Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList, Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAlloc, int frameIndex)
+{
+	CheckHR(commandList->Reset(commandAlloc.Get(), nullptr));
+
+	commandList->OMSetRenderTargets(1, &cDXWindow::GetBuuferData().descHandleRtv, true, &cDXWindow::GetBuuferData().descHandleDsv);
+	cRenderingOrder m_Order;
+
+	// TODO ローカルで保存せずにグローバルで取得できるようにする
+	D3D12_VIEWPORT viewport = {};
+	viewport.Width = (float)1920;
+	viewport.Height = (float)1080;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	commandList->RSSetViewports(1, &viewport);
+	D3D12_RECT scissor = {};
+	scissor.right = (LONG)1920;
+	scissor.bottom = (LONG)1080;
+	commandList->RSSetScissorRects(1, &scissor);
+
+	// TODO 描画コンポーネントから使用するPSOを識別して変更する
+
+	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	m_ConstBuf.Upload();
+	DirectX::XMFLOAT4X4 mats[Render::g_MaxInstNum];
+	auto& renderingObj = m_Order.GetMapObj();	// 描画するオブジェクト
+	std::string NowPsoName = "";
+	cModelManager manager;
+
+	// 登録されているリソースオブジェクトをすべて更新する
+	for (auto& itr : renderingObj) {
+		// PSOが登録されているかチェック
+		if (NowPsoName != itr.second[0]->GetPsoName()) {
+			// PSOを新しく登録
+			auto pso = m_PsoManager->RequestPSO(itr.second[0]->GetPsoName());
+			commandList->SetGraphicsRootSignature(pso->GetSettingRootSignature()->GetRootSignature().Get());
+			commandList->SetPipelineState(pso->GetPipelineState().Get());
+		}
+
+		auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap(frameIndex)->GetGPUDescriptorHandleForHeapStart();
+		ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap(frameIndex) };
+		commandList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
+		commandList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
+		m_Order.RetrunWorldMatrix(itr.first, mats, frameIndex);
+		manager.Draw(frameIndex, mats, itr.first, commandList.Get(), true, 1, itr.second.size());		// TODO 仮実装
+	}
+
+	commandList->Close();
 }
 
 void cRenderingFramework::CreatePSO()

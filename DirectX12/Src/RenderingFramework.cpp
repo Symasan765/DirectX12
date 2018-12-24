@@ -61,13 +61,13 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 		if (i == 1) {
 			m_ConstBuf.Upload();
 			DirectX::XMFLOAT4X4 mats[Render::g_MaxInstNum];
-			m_Order.RetrunWorldMatrix(mats, frameIndex);
+			m_Order.RetrunWorldMatrix(1000,mats, frameIndex);
 			auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap(frameIndex)->GetGPUDescriptorHandleForHeapStart();
 			ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap(frameIndex) };
 			commandList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
 			commandList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
 			cModelManager manager;
-			manager.Draw(frameIndex,mats, 0, commandList.Get(), true, 1, 1);		// TODO ‰¼ŽÀ‘•
+			manager.Draw(frameIndex,mats, 1000, commandList.Get(), true, 1, 1);		// TODO ‰¼ŽÀ‘•
 		}
 
 		commandList->Close();

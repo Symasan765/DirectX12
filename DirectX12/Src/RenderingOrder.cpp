@@ -1,19 +1,20 @@
 #include "RenderingOrder.h"
 #include "Behavior.h"
 
-std::unordered_map<std::string, std::vector<cPsoRendrObjData>> cRenderingOrder::m_PsoMap;
+std::map<UINT, std::vector<cMeshRenderer*>> cRenderingOrder::m_ObjMap;
 
 void cRenderingOrder::AddRenderObj(cMeshRenderer * obj)
 {
 	int ResourceID = obj->ResourceID();
-	cPsoRendrObjData data;
-	data.m_ObjMap[ResourceID].push_back(obj);
-	m_PsoMap[obj->GetPsoName()].push_back(data);
+	m_ObjMap[ResourceID].push_back(obj);
 }
 
-void cRenderingOrder::RetrunWorldMatrix(DirectX::XMFLOAT4X4 * mat, int frameIndex)
+void cRenderingOrder::RetrunWorldMatrix(int resourceID, DirectX::XMFLOAT4X4 * mat, int frameIndex)
 {
-	for (auto& itr : m_PsoMap) {
-		
+	for (int i = 0; i < m_ObjMap[resourceID].size(); i++) {
+		mat[i] = m_ObjMap[resourceID][i]->GameObjct()->GetTransform()->ToWorldMatrix(frameIndex);
+		DirectX::XMMATRIX matrix = DirectX::XMLoadFloat4x4(&mat[i]);
+		matrix = DirectX::XMMatrixTranspose(matrix);
+		DirectX::XMStoreFloat4x4(&mat[i], matrix);
 	}
 }

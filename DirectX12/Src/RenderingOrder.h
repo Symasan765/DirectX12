@@ -3,11 +3,7 @@
 #include "Render.h"
 #include "DXMath.h"
 #include <vector>
-#include <unordered_map>
-
-struct cPsoRendrObjData {
-	std::unordered_map<int, std::vector<cMeshRenderer*>> m_ObjMap;
-};
+#include <map>
 
 /// <summary>
 /// cMeshRendererコンポーネントからオブジェクトの描画依頼を受け取るクラス
@@ -19,7 +15,8 @@ public:
 	~cRenderingOrder() = default;
 
 	static void AddRenderObj(cMeshRenderer* obj);		// どこからでも登録ができるようにstatic
-	void RetrunWorldMatrix(DirectX::XMFLOAT4X4* mat,int frameIndex);	// TODO 暫定的に入れてる
+	void RetrunWorldMatrix(int resourceID,DirectX::XMFLOAT4X4* mat,int frameIndex);	// TODO 暫定的に入れてる
+	std::map<UINT, std::vector<cMeshRenderer*>>& GetMapObj() { return m_ObjMap; };
 private:
-	static std::unordered_map<std::string, std::vector<cPsoRendrObjData>> m_PsoMap;
+	static std::map<UINT, std::vector<cMeshRenderer*>> m_ObjMap;
 };

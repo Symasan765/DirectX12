@@ -72,7 +72,6 @@ void cRenderingFramework::Draw(std::shared_ptr<cCommandSystem> m_CommandSystem, 
 
 		commandList->Close();
 	}
-	m_Order.ClearObjs(frameIndex);
 }
 
 void cRenderingFramework::Execute(std::shared_ptr<cCommandSystem> m_CommandSystem, std::shared_ptr<cCommandQueue> queue, int frameIndex)
@@ -114,5 +113,5 @@ void cRenderingFramework::CreatePSO()
 	inputLayout->AddElement<DirectX::XMFLOAT4>("MATRIX", DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 3, 1, 1);
 
 	format.push_back(DXGI_FORMAT_R8G8B8A8_UNORM);
-	pso->CreatePipelineState();
+	pso->CreatePipelineState(1);
 }

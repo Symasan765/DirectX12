@@ -2,14 +2,15 @@
 #include "AssimpLoader.h"
 #include "DXMath.h"
 #include "Render.h"
+#include "PipelineStateObj.h"
 
 std::unordered_map<UINT, std::unique_ptr<cModelResource>> cModelManager::m_ResourceMap;
 
-UINT cModelManager::Load(std::string fileName)
+UINT cModelManager::Load(std::string fileName, std::string PsoName)
 {
 	// まずリソース番号を設定する
-	// リソース番号はロードされた順に設定
-	const UINT ID = static_cast<UINT>(m_ResourceMap.size());
+	// リソース番号はロードされた順に設定 + PSOの順列付けによって管理
+	const UINT ID = static_cast<UINT>(m_ResourceMap.size()) + cPipelineStateObj::GetPsoPriority(PsoName);
 
 	cAssimpLoader Loader;
 	m_ResourceMap[ID] = Loader.Load(fileName);

@@ -16,6 +16,7 @@ public:
 
 	void Load(std::string fileName, std::string psoName);
 	int ResourceID() { return m_ResourceID; };
+	std::string GetPsoName() { return m_PsoName; };
 private:
 	int m_ResourceID = -1;
 	std::string m_PsoName;

@@ -5,6 +5,8 @@
 #include "InputLayout.h"
 #include "ShaderByte.h"
 
+std::unordered_map<std::string, UINT> cPipelineStateObj::m_PriorityMap;
+
 cPipelineStateObj::cPipelineStateObj(std::string psoName)
 {
 	m_pRootSignature = std::make_shared<cRootSignature>();
@@ -26,7 +28,7 @@ cPipelineStateObj::cPipelineStateObj(std::string psoName)
 	psoDesc.SampleDesc.Count = 1;
 }
 
-void cPipelineStateObj::CreatePipelineState()
+void cPipelineStateObj::CreatePipelineState(UINT priority)
 {
 	// 各設定用オブジェの作成を行う
 	m_pRootSignature->CreateCommit();
@@ -36,7 +38,22 @@ void cPipelineStateObj::CreatePipelineState()
 	RootSignatureSetting(m_pRootSignature->GetRootSignature().Get());
 	ShaderBytecodeSetting(m_pShaderByte.get());
 
+#ifdef _DEBUG
+	// マップの多重登録チェック
+	auto itr = m_PriorityMap.find(m_PsoName);        // "xyz" が設定されているか？
+	if (itr != m_PriorityMap.end()) {
+		_ASSERT_EXPR(true, _T("同じ名前のPSOが作成されようとしています"));
+	}
+#endif
+
+	m_PriorityMap[m_PsoName] = priority * PipelineStateObjParam::g_PriorityRate;	// 優先度を保存
+
 	CheckHR(cDirectX12::GetDevice()->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(m_Pso.ReleaseAndGetAddressOf())));
+}
+
+UINT cPipelineStateObj::GetPsoPriority(std::string psoName)
+{
+	return m_PriorityMap[psoName];
 }
 
 void cPipelineStateObj::RenderTargetSetting(DXGI_FORMAT * format, unsigned RTNum)

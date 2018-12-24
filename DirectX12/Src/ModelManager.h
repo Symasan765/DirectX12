@@ -10,7 +10,7 @@ public:
 	cModelManager() = default;
 	~cModelManager() = default;
 
-	static UINT Load(std::string fileName);
+	static UINT Load(std::string fileName, std::string PsoName);
 	static cModelResource* Read(UINT ResourceID);
 	void Draw(int frameIndex,DirectX::XMFLOAT4X4* matPtr, UINT ResourceID, ID3D12GraphicsCommandList * cmdList, bool texDrawFlag, UINT RootParameterIndex, UINT InstanceCount);
 private:

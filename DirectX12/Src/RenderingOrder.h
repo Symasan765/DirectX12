@@ -5,6 +5,10 @@
 #include <vector>
 #include <unordered_map>
 
+struct cPsoRendrObjData {
+	std::unordered_map<int, std::vector<cMeshRenderer*>> m_ObjMap;
+};
+
 /// <summary>
 /// cMeshRendererコンポーネントからオブジェクトの描画依頼を受け取るクラス
 /// </summary>
@@ -14,9 +18,8 @@ public:
 	cRenderingOrder() = default;
 	~cRenderingOrder() = default;
 
-	static void AddRenderObj(cMeshRenderer* obj,int frameIndex);		// どこからでも登録ができるようにstatic
-	void ClearObjs(int frameIndex);		// クリアは実態を持っている場所でのみ可能。描画が終わったあとに実行する
+	static void AddRenderObj(cMeshRenderer* obj);		// どこからでも登録ができるようにstatic
 	void RetrunWorldMatrix(DirectX::XMFLOAT4X4* mat,int frameIndex);	// TODO 暫定的に入れてる
 private:
-	static std::unordered_map<int, std::vector<cMeshRenderer*>> m_ObjMap[Render::g_LatencyNum];
+	static std::unordered_map<std::string, std::vector<cPsoRendrObjData>> m_PsoMap;
 };

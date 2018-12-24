@@ -5,6 +5,11 @@
 #include "RootSignature.h"
 #include <memory>
 #include <vector>
+#include <unordered_map>
+
+namespace PipelineStateObjParam {
+	constexpr int g_PriorityRate = 1000;
+}
 
 /// <summary>
 /// PSOを一括りに作成するクラス
@@ -14,7 +19,7 @@ class cPipelineStateObj
 public:
 	cPipelineStateObj(std::string psoName);	// cPSOManagerクラスから作成する
 	~cPipelineStateObj() = default;
-	void CreatePipelineState();
+	void CreatePipelineState(UINT priority);
 
 	// 他の設定項目への対応は暫定的にオブジェクト自体を渡して行う
 	inline D3D12_GRAPHICS_PIPELINE_STATE_DESC* GetPipelineDESC() { return &psoDesc; };
@@ -33,6 +38,8 @@ public:
 	std::vector<DXGI_FORMAT>& GetSettingRtvFormat() {
 		return m_RtvFormat;
 	};
+
+	static UINT GetPsoPriority(std::string psoName);
 private:
 	//=====以下の関数は設定必須======
 	void RenderTargetSetting(DXGI_FORMAT* format, unsigned RTNum);
@@ -52,4 +59,7 @@ private:
 	std::vector<DXGI_FORMAT> m_RtvFormat;
 
 	std::string m_PsoName;		// このオブジェクトの名前
+
+	// 全体で持っているPSOの実行順を管理するマップ
+	static std::unordered_map<std::string, UINT> m_PriorityMap;
 };

@@ -4,7 +4,6 @@
 
 cTestScene::cTestScene()
 {
-	cModelManager::Load("Link.x");
 }
 
 cTestScene::~cTestScene()

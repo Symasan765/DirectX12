@@ -16,3 +16,9 @@ struct VERTEX_TEST {
 	DirectX::XMFLOAT3 normal = { 0.0f,0.0f,0.0f };
 	DirectX::XMFLOAT2 texcoord = { 0.0f,0.0f };
 };
+
+struct ScreenQuadVertex
+{
+	DirectX::XMFLOAT4 position;
+	DirectX::XMFLOAT2 texcoord;
+};

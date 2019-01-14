@@ -204,6 +204,9 @@
     <ClCompile Include="Src\SceneBase.cpp">
       <Filter>Scene\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ScreenQuad.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Utility.h">
@@ -400,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="Src\SceneBase.h">
       <Filter>Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ScreenQuad.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

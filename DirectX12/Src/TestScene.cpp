@@ -22,7 +22,7 @@ cPlayer::cPlayer()
 
 void cPlayer::Update(float deltaTime)
 {
-	m_Transform->Rotation().y += 0.1f;
+	m_Transform->Rotation().y += 360.0f * (3.141592653 / 180) * deltaTime;
 	m_Transform->Scale().x = 10.0f;
 	m_Transform->Scale().y = 10.0f;
 	m_Transform->Scale().z = 10.0f;
